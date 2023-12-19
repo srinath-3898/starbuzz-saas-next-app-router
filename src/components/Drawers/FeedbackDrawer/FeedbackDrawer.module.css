@@ -1,0 +1,62 @@
+.container {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+}
+
+.sub_container {
+  display: grid;
+  gap: 10px;
+}
+
+.slider {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.box_1 {
+  width: 50%;
+}
+
+.score {
+  padding-left: 25%;
+}
+
+.sub_container p {
+  margin-bottom: 14px;
+}
+
+.suggestions {
+  width: 100%;
+}
+
+.performance > div:nth-child(2) {
+  display: flex;
+  gap: 20px;
+  width: 90%;
+  margin: auto;
+}
+
+.radio {
+  display: flex;
+  gap: 5px;
+}
+
+.text_color {
+  color: #6f6f6f;
+}
+
+.text_color_1 {
+  color: #6f6f6f;
+}
+
+.text_color_2 {
+  color: #525151;
+}
+
+.submit_btn:hover {
+  border: 1px solid #ff5900;
+  color: #ff5900;
+}

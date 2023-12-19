@@ -1,0 +1,60 @@
+.container {
+  display: grid;
+
+  font-size: 20px;
+}
+
+.post_data {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding: 0 15px 15px 15px;
+}
+
+.post_card_a_metrics {
+  display: grid;
+  grid-template-columns: 0.33fr 1fr;
+  margin-top: 15px;
+}
+
+.post_data span {
+  color: #716d6d;
+}
+
+.post_metrics {
+  padding: 0 10px;
+}
+
+.postmetrics_title_btn {
+  display: grid;
+  grid-template-columns: 4fr 0.5fr;
+}
+
+.postmetrics_title_btn p {
+  font-size: 16px;
+}
+
+.add_post_btn {
+  display: grid;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.add_post_btn span {
+  font-size: 14px;
+  padding: 4px 12px;
+  color: #ff5900;
+  border-radius: 10px;
+  border: 1px solid #ff5900;
+  cursor: pointer;
+}
+
+.table_top span:first-child {
+  font-size: 1.2rem;
+  color: #000;
+}
+
+.table_top span:last-child {
+  font-size: 2.4rem;
+}

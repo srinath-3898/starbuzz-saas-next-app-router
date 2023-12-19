@@ -1,0 +1,12 @@
+.input_controller {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}

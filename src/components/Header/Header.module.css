@@ -1,0 +1,70 @@
+.container {
+}
+
+.container_1 {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 10px;
+}
+
+.container_1_box_2 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 
+.container_1_box_3 {
+  display: flex;
+  justify-content: center;
+}
+
+.container_1_box_3 p {
+  background-color: #fe590011;
+  text-align: center;
+  padding: 10px;
+} */
+
+.container_1_box_3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 4fr;
+  align-items: center;
+}
+.item,
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.option img {
+  border-radius: 50%;
+}
+
+.horizantal_line {
+  border: 1px solid #e8e8e8;
+}
+
+.container_2 {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.wallet_item {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  width: 190px;
+  padding: 3px 1px;
+}
+
+.wallet_item_name {
+  color: #5094f4;
+}
+
+.wallet_item_value {
+  color: #ef8427;
+}

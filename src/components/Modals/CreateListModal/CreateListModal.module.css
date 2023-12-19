@@ -1,0 +1,11 @@
+.container {
+  display: grid;
+  gap: 20px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}

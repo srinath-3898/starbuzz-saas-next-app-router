@@ -1,0 +1,112 @@
+.container {
+  height: 100%;
+}
+
+.campaign_form {
+  counter-reset: campaign-form-counter;
+}
+
+.campaign_form .serial_number::before {
+  counter-increment: campaign-form-counter;
+  content: counter(campaign-form-counter) ". ";
+  padding-right: 5px;
+}
+
+.container label {
+  font-size: 1.3rem;
+}
+.input {
+  width: 100%;
+}
+.inputfield {
+  width: 70%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  align-items: center;
+  padding: 20px 0;
+  column-gap: 20px;
+}
+.input_name {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.inputfield ::placeholder {
+  color: rgba(186, 184, 184, 0.892);
+}
+.input_name p {
+  margin-left: 7%;
+}
+.heading {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: auto;
+  border-top: 1px solid rgba(234, 232, 232, 0.892);
+  border-bottom: 1px solid rgba(234, 232, 232, 0.892);
+  padding: 20px 0px;
+}
+.note {
+  color: rgba(177, 176, 176, 0.892);
+}
+.heading_campaign_type {
+  margin: auto;
+  padding: 10px;
+  width: max-content;
+  justify-content: center;
+}
+.heading_color {
+  color: rgb(102 84 84);
+}
+.input_radio_container {
+  width: auto;
+  margin: auto;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.input_controller {
+  display: flex;
+
+  line-height: center;
+}
+
+.custom_radio {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid rgba(230, 228, 228, 0.892);
+  border-radius: 7px;
+  transition: background 0.3s;
+  user-select: none;
+}
+
+/* .custom_radio:hover {
+    background: rgb(254, 204, 204);
+  } */
+
+.input_controller input[type="radio"] {
+  display: none;
+}
+
+.input_controller input[type="radio"]:checked + .custom_radio {
+  border: 1px solid #ff5900;
+}
+.input_controller input[type="radio"]:checked + .custom_radio label {
+  color: #ff5900;
+}
+.input_controller input[type="radio"] + .custom_radio::before {
+  content: "";
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 20px;
+}

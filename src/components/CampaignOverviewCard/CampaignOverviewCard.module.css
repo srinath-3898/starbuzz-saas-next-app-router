@@ -1,0 +1,39 @@
+.container {
+  border-radius: 10px;
+  background-image: url("../../assets/svgs/TwoCircles.svg");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 40%;
+  background-position-x: 115%;
+  padding-left: 15px;
+  background-color: #ece9ff;
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  align-items: center;
+}
+
+.container_1 {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+#title {
+  color: #555f74;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.container_2 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

@@ -1,0 +1,54 @@
+.container {
+  height: 100%;
+  padding: 20px 20px 0px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container_1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.no_data {
+  margin: auto;
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.no_data img {
+  width: 100%;
+  height: auto;
+}
+
+.container_2 {
+  height: 45rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.campaigns {
+  position: relative;
+  overflow-y: scroll;
+  display: grid;
+  gap: 15px;
+  align-items: start;
+}
+
+.campaigns > div:last-child {
+  margin-bottom: 10px;
+}
+.campaigns_blur {
+  filter: blur(5px);
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

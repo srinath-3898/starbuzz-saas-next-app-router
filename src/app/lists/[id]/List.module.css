@@ -1,0 +1,64 @@
+.container {
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container_1 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title,
+.description,
+.created_at {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title p:nth-child(2),
+.description P:nth-child(2),
+.created_at p:nth-child(2) {
+  color: gray;
+}
+
+.container_2 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid #e7e7e7;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.container_2_box_1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container_2_box_2 {
+  border: 1px solid #e7e7e7;
+}
+
+.name,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.actions {
+  justify-content: center;
+}
+
+.name img {
+  border-radius: 50%;
+}
+
+.add_influencer_to_campaign {
+  cursor: pointer;
+}

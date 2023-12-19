@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

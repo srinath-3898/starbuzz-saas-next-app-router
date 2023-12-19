@@ -1,0 +1,22 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.container {
+  width: 50vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.container_1 {
+  padding: 20px;
+  border-right: 1px solid #e7e7e7;
+}
+
+.container_2 {
+  padding: 20px;
+}

@@ -1,0 +1,65 @@
+.container {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s, transform 0.3s;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 2fr repeat(7, 1fr);
+}
+
+.container:hover {
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.box P:first-child {
+  color: gray;
+  font-weight: bold;
+}
+
+.icons,
+.actions {
+  display: flex;
+  gap: 15px;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.campaign_name {
+  color: gray;
+  overflow: hidden;
+  max-height: 100px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.campaign_name:hover {
+  text-decoration: underline;
+}
+
+.planning {
+  color: steelblue;
+}
+
+.active {
+  color: #07a205;
+}
+
+.paused {
+  color: #ff0000;
+}
+
+.completed {
+  color: #0000ff;
+}

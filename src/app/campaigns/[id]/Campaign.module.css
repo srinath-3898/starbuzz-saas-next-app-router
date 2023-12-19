@@ -1,0 +1,187 @@
+.container {
+  height: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container_1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container_1_box_1 {
+  display: flex;
+  gap: 15px;
+}
+
+.campaign_duration {
+  color: rgb(159, 160, 161);
+}
+
+.container_1_box_2,
+.container_1_box_3 {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.container_2,
+.container_3 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+}
+
+.container_3 {
+  padding-bottom: 15px;
+}
+
+.container_2_box_1 {
+  display: grid;
+  grid-template-rows: 1fr 2.5fr;
+  gap: 20px;
+}
+
+.description_and_scope {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.description,
+.scope {
+  padding: 0px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-right: 2px solid rgb(239, 227, 227);
+}
+
+.scope {
+  border: none;
+}
+
+.description p:nth-child(2),
+.scope p:nth-child(2) {
+  max-height: 100px;
+  overflow-y: auto;
+  color: gray;
+  word-break: break-word;
+  display: block;
+}
+
+.campaign_cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.container_2_box_2 {
+  border: 1px solid rgb(226, 222, 222);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.container_2_box_2 img {
+  width: 100%;
+  height: auto;
+}
+
+.campaign_automation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.campaign_automation p {
+  color: #5094f4;
+}
+
+.container_3_box_1,
+.container_3_box_2 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid rgb(226, 222, 222);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.container_3_box_1 > div:first-child {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status_accepted p {
+  color: #05b651;
+}
+
+.status_rejected p {
+  color: #ff2222;
+}
+
+.status_pending p {
+  color: #ff941a;
+}
+
+.status_negotiated p {
+  color: #0070c0;
+}
+
+.status_accepted {
+  background-color: rgba(5, 182, 81, 0.2);
+}
+
+.status_rejected {
+  background-color: rgba(255, 34, 34, 0.2);
+}
+
+.status_pending {
+  background-color: rgba(255, 148, 26, 0.2);
+}
+
+.status_negotiated {
+  background-color: rgba(0, 112, 192, 0.2);
+}
+
+.manual_campaign_btn {
+  background-color: #086dfa;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+}
+.campaign_automation {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.campaign_automation_btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.campaign_automation_details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.change_date {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

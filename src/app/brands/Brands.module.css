@@ -1,0 +1,40 @@
+.container {
+  height: 100%;
+}
+
+.container_1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+.brands_container {
+  height: 70%;
+}
+
+.table_header {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 20px;
+  background-color: #ededed;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.table_body {
+  height: 300px;
+}
+
+.table_row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.error {
+  height: 85%;
+}

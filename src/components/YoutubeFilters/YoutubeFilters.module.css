@@ -1,0 +1,49 @@
+.container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filters_error {
+  height: 300px;
+}
+
+.filters {
+  background-color: #f6f8f9;
+  padding: 15px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.filter,
+.influencers {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.heading {
+  display: flex;
+  gap: 20px;
+}
+
+.search_button {
+  display: flex;
+  justify-content: center;
+}
+
+.sort_order {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}

@@ -1,0 +1,75 @@
+.container_1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container_1 input {
+  padding-right: 30px;
+}
+
+.get_report {
+  cursor: not-allowed;
+  color: #b3b3b3;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.active_get_report {
+  cursor: pointer;
+  color: #fe5900;
+}
+
+.search_icon {
+  position: absolute;
+  top: 12px;
+  right: 140px;
+}
+
+.search_influencers,
+.search_influencers_error {
+  width: 400px;
+  position: absolute;
+  max-height: 400px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  top: 40px;
+  border-radius: 3px;
+  padding: 10px;
+  overflow-y: auto;
+  display: grid;
+  gap: 5px;
+  z-index: 1000;
+}
+
+.search_influencers_error p {
+  text-align: center;
+  color: red;
+}
+
+.search_influencer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search_influencer img,
+.selected_influencer img {
+  border-radius: 50%;
+}
+
+.search_influencer:hover {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+}
+
+.selected_influencer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: absolute;
+  top: 8px;
+  left: 10px;
+}

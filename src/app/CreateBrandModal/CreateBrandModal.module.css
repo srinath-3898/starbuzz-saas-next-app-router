@@ -1,0 +1,41 @@
+.create_brand_modal {
+  width: 25vw;
+  height: 47vh;
+  display: grid;
+  align-items: center;
+}
+
+.update_brand_modal {
+  width: 20vw;
+  height: 20vh;
+  display: grid;
+  align-items: center;
+}
+
+.input_controller {
+  display: grid;
+  gap: 5px;
+  position: relative;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  top: 70px;
+}
+
+.error p {
+  color: red;
+}
+
+.error p:hover {
+  cursor: pointer;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}

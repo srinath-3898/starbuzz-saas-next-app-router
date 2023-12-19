@@ -1,0 +1,62 @@
+.container {
+  height: 100%;
+  padding: 20px;
+  display: grid;
+  gap: 20px;
+  position: relative;
+}
+
+.basic_report {
+  display: grid;
+  grid-template-areas:
+    "profile_pic details_1"
+    "profile_pic details_2";
+  align-items: center;
+}
+
+.profile_pic {
+  grid-area: profile_pic;
+  display: flex;
+  justify-content: center;
+}
+
+.profile_pic img {
+  border-radius: 50%;
+  border: 1px solid #e7e7e7;
+}
+
+.basic_report_container_1 {
+  grid-area: details_1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.basic_report_container_1 div,
+.basic_report_container_2 div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.basic_report_container_2 {
+  grid-area: details_2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.container_1,
+.container_2,
+.container_3 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.unlock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.loader {
+  height: 100vh;
+}

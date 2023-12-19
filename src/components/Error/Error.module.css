@@ -1,0 +1,25 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 15px;
+}
+
+.error_res {
+  height: 100vh;
+}
+
+.error img {
+  height: 75%;
+}
+
+.error_message {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background-color: #ff000022;
+  color: red;
+}
