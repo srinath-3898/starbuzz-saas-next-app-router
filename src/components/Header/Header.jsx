@@ -1,3 +1,4 @@
+"use client";
 import styles from "./Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { PlusCircleFilled, PlusCircleOutlined } from "@ant-design/icons";
@@ -5,7 +6,7 @@ import Link from "next/link";
 import CustomDropdown from "../CustomDropdown/CustomDropdown";
 import Image from "next/image";
 import userSvg from "../../assets/svgs/user.svg";
-import subscriptionSvg from "../../assets/svgs/subscription.svg";
+import subscriptionSvg from "../../assets/svgs/Subscription.svg";
 import Feedbacks from "../../assets/svgs/feedBacks.svg";
 import { Select, Skeleton } from "antd";
 import { useEffect, useState } from "react";
@@ -14,10 +15,10 @@ import {
   setBrandId,
   setRoleId,
 } from "@/store/globalVariables/globalVariablesSlice";
-import SearchInfluencers from "../searchInfluencers/SearchInfluencers";
 import { getRolesByUser } from "@/store/roles/rolesActions";
 import FeedbackDrawer from "../Drawers/FeedbackDrawer/FeedbackDrawer";
 import { usePathname, useRouter } from "next/navigation";
+import SearchInfluencers from "../SearchInfluencers/SearchInfluencers";
 
 const Header = () => {
   const dispatch = useDispatch();
