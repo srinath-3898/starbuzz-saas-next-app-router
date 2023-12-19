@@ -12,9 +12,9 @@ import {
   resetGenerateCheckoutURLData,
 } from "@/store/payment/paymentSlice";
 import { getUserDetails } from "@/store/auth/authActions";
-import AddonsModal from "../modals/addonsModal/AddonsModal";
 import { getAddOns } from "@/store/addOns/addOnsActions";
 import SubscriptionPlan from "./SubscriptionPlan/SubscriptionPlan";
+import AddonsModal from "../Modals/AddonsModal/AddonsModal";
 
 const SubscriptionPlans = () => {
   const dispatch = useDispatch();

@@ -1,3 +1,4 @@
+"use client";
 import styles from "./Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { PlusCircleFilled, PlusCircleOutlined } from "@ant-design/icons";
@@ -14,10 +15,10 @@ import {
   setBrandId,
   setRoleId,
 } from "@/store/globalVariables/globalVariablesSlice";
-import SearchInfluencers from "../searchInfluencers/SearchInfluencers";
 import { getRolesByUser } from "@/store/roles/rolesActions";
 import FeedbackDrawer from "../Drawers/FeedbackDrawer/FeedbackDrawer";
 import { usePathname, useRouter } from "next/navigation";
+import SearchInfluencers from "../SearchInfluencers/SearchInfluencers";
 
 const Header = () => {
   const dispatch = useDispatch();
