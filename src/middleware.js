@@ -12,15 +12,18 @@ export function middleware(request) {
   if (!token && !isPublicPath) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
+
   if (isPublicPath && token) {
+    return NextResponse.redirect(new URL("/", request.nextUrl));
+  }
+
+  if (!isPublicPath && token) {
     if (user) {
       user = JSON.parse(user);
-      if (!user?.isEmailVerified) {
+      if (path !== "/" && !user?.isEmailVerified) {
         return NextResponse.redirect(new URL("/", request.nextUrl));
-      } else if (!user?.appTour) {
+      } else if (!user?.appTour && path !== "/appTour" && path !== "/") {
         return NextResponse.redirect(new URL("/appTour", request.nextUrl));
-      } else {
-        return NextResponse.redirect(new URL("/", request.nextUrl));
       }
     } else {
       return NextResponse.redirect(new URL("/", request.nextUrl));
@@ -39,5 +42,8 @@ export const config = {
     "/campaigns/:path*",
     "/roles",
     "/reports",
+    "/users",
+    "/brands",
+    "/appTour",
   ],
 };
