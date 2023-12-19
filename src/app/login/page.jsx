@@ -16,7 +16,6 @@ import { resetAuthData } from "@/store/auth/authSlice";
 import ForgotPasswordModal from "@/components/Modals/ForgotPasswordModal/ForgotPasswordModal";
 import { useRouter } from "next/navigation";
 import { getUserDetails, signin } from "@/store/auth/authActions";
-import Loader from "@/components/Loader/Loader";
 
 const Login = () => {
   const router = useRouter();
@@ -25,8 +24,8 @@ const Login = () => {
   const { loading, token, user, error } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
-    email: "gabinil947@newcupon.com",
-    password: "Munnuru@1998",
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
@@ -77,7 +76,7 @@ const Login = () => {
   useEffect(() => {
     if (token) {
       document.cookie = `token=${token}; path=/`;
-      // setFormData({ email: "", password: "" });
+      setFormData({ email: "", password: "" });
       dispatch(getUserDetails());
       router.push("/");
     } else {
