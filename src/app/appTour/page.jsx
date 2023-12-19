@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./AppTour.module.css";
 import Profile from "../../assets/svgs/Profile.svg";
 import Settings from "../../assets/svgs/Settings.svg";
-import Subscription from "../../assets/svgs/subscription.svg";
+import Subscription from "../../assets/svgs/Subscription.svg";
 import { getUserDetails, updateAppTour } from "@/store/auth/authActions";
 import Loader from "@/components/Loader/Loader";
 import ReportsIcon from "@/components/ReportsIcon/ReportsIcon";

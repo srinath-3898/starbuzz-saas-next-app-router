@@ -5,7 +5,7 @@ import Link from "next/link";
 import CustomDropdown from "../CustomDropdown/CustomDropdown";
 import Image from "next/image";
 import userSvg from "../../assets/svgs/user.svg";
-import subscriptionSvg from "../../assets/svgs/subscription.svg";
+import subscriptionSvg from "../../assets/svgs/Subscription.svg";
 import Feedbacks from "../../assets/svgs/feedBacks.svg";
 import { Select, Skeleton } from "antd";
 import { useEffect, useState } from "react";

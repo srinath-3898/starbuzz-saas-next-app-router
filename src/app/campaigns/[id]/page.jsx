@@ -45,12 +45,12 @@ import CampaignOverviewCard from "@/components/CampaignOverviewCard/CampaignOver
 import CampaignPosts from "@/components/CampaignPosts/CampaignPosts";
 import Error from "@/components/Error/Error";
 import Pagination from "@/components/Pagination/Pagination";
-import StartCampaignManuallyModal from "@/components/Modals/StartCampaignManuallyModal/StartCampaignManuallyModal";
 import BillingAddressModal from "@/components/Modals/BillingAddressModal/BillingAddressModal";
-import EditCampaignEndDateModal from "@/components/Modals/EditCampaignEndDateModal/EditCampaignEndDateModal";
-import ManualCampaignInfoModal from "@/components/Modals/ManualCampaignInfoModal/ManualCampaignInfoModal";
 import UpdateCampaignInfluencerModal from "@/components/Modals/UpdateCampaignInfluencerModal/UpdateCampaignInfluencerModal";
 import CampaignAutomationInfoModal from "@/components/Modals/CampaignAutomationInfoModal/CampaignAutomationInfoModal";
+import StartCampaignManuallyModal from "@/components/Modals/startCampaignManuallyModal/StartCampaignManuallyModal";
+import EditCampaignEndDateModal from "@/components/Modals/editCampaignEndDateModal/EditCampaignEndDateModal";
+import ManualCampaignInfoModal from "@/components/Modals/manualCampaignInfoModal/ManualCampaignInfoModal";
 
 const Campaign = () => {
   const router = useRouter();
