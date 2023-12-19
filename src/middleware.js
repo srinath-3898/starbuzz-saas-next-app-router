@@ -25,8 +25,6 @@ export function middleware(request) {
       } else if (!user?.appTour && path !== "/appTour" && path !== "/") {
         return NextResponse.redirect(new URL("/appTour", request.nextUrl));
       }
-    } else {
-      return NextResponse.redirect(new URL("/", request.nextUrl));
     }
   }
 }
