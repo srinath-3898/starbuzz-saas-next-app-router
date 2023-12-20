@@ -9,7 +9,7 @@ export const getReport = createAsyncThunk(
         "token"
       )}`;
       const response = await api.post(
-        `/user/brand/${brandId}/report/${username}`
+        `/user/brand/${brandId}/ig/report/${username}`
       );
       return response;
     } catch (error) {
@@ -25,7 +25,9 @@ export const getFreemiumReport = createAsyncThunk(
       api.defaults.headers.common["Authorization"] = ` ${localStorage.getItem(
         "token"
       )}`;
-      const response = await api.post(`/user/brand/${brandId}/report/freemium`);
+      const response = await api.post(
+        `/user/brand/${brandId}/ig/report/freemium`
+      );
       return response;
     } catch (error) {
       return rejectWithValue(error);
@@ -41,7 +43,7 @@ export const checkReportGenerated = createAsyncThunk(
         "token"
       )}`;
       const response = await api.get(
-        `/user/brand/${brandId}/report/is-report-generated/${username}`
+        `/user/brand/${brandId}/ig/report/is-report-generated/${username}`
       );
       return response;
     } catch (error) {
