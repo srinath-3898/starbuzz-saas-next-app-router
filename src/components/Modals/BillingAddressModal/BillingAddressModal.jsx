@@ -171,7 +171,6 @@ const BillingAddressModal = ({
         country: "INDIA",
         country_code: "IN",
         vat_number: organisation?.vat_number ? organisation?.vat_number : "",
-        state: organisation?.state ? organisation?.state : "",
       });
     }
   }, [organisation]);
