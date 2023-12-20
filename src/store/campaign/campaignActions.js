@@ -3,13 +3,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getCampaign = createAsyncThunk(
   "campaign/getCampaign",
-  async (params, { rejectWithValue }) => {
+  async ({ brandId, campaignId }, { rejectWithValue }) => {
     try {
       api.defaults.headers.common["Authorization"] = `${localStorage.getItem(
         "token"
       )}`;
       const response = await api.get(
-        `/user/brand/${params.brandId}/campaign/${params.campaignId}`
+        `/user/brand/${brandId}/campaign/${campaignId}`
       );
       return response;
     } catch (error) {

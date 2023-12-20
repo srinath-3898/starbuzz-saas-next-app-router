@@ -495,12 +495,6 @@ const Campaign = () => {
                 >
                   Edit
                 </button>
-                {/* <button
-                  onClick={() => setDeleteCampaignModalOpen(true)}
-                  className={`btn_small btn_primary`}
-                >
-                  Delete
-                </button> */}
               </div>
             </div>
             <div className={styles.container_2}>

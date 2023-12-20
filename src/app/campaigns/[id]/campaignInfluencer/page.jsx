@@ -36,7 +36,7 @@ import { useParams, useSearchParams } from "next/navigation";
 const CampaignInfluencer = () => {
   const dispatch = useDispatch();
 
-  const username = useSearchParams().getAll("username");
+  const username = useSearchParams().get("username");
   const { id } = useParams();
   const { brandId } = useSelector((state) => state.globalVariables);
   const {
