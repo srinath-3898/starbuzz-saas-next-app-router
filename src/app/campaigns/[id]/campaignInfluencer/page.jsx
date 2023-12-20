@@ -103,7 +103,6 @@ const CampaignInfluencer = () => {
   };
 
   const handleEditPost = () => {
-    console.log(post);
     dispatch(
       updatePost({
         brandId,

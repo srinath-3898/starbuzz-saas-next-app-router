@@ -2,11 +2,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Dashboard.module.css";
 import { Skeleton, message } from "antd";
-import { CheckCircleFilled } from "@ant-design/icons";
 import { resetAuthData } from "@/store/auth/authSlice";
 import { useEffect, useState } from "react";
 import Assistance from "@/components/Assistance/Assistance";
-import { getUserDetails } from "@/store/auth/authActions";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -19,15 +17,8 @@ const Dashboard = () => {
   useEffect(() => {
     if (authMessage) {
       messageApi.open({
-        key: "updatable",
+        type: "success",
         content: authMessage,
-        duration: 5,
-        icon: (
-          <CheckCircleFilled style={{ color: "#fe5900", fontSize: "14px" }} />
-        ),
-        style: {
-          fontSize: "14px",
-        },
       });
     }
     dispatch(resetAuthData());

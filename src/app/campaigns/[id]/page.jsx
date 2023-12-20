@@ -487,7 +487,7 @@ const Campaign = () => {
                 <button
                   onClick={() => {
                     router.push({
-                      pathname: `/campaigns/createcampaign`,
+                      pathname: `/campaigns/createCampaign`,
                       query: { id: id },
                     });
                   }}
@@ -712,7 +712,6 @@ const Campaign = () => {
         }}
         footer={[]}
       >
-        {" "}
         <p className="text_medium">{notes ? notes : "No notes added"}</p>
       </Modal>
       <EditCampaignEndDateModal
