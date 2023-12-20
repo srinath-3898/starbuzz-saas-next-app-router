@@ -69,8 +69,6 @@ const StartCampaignManuallyModal = ({ open, setOpen }) => {
         dispatch(getCampaign({ brandId: brandId, campaignId: id }));
         setOpen(false);
       });
-      console.log("form is valid ");
-      console.log(campaignDates);
     }
   };
   const handleCloseError = (name) => {

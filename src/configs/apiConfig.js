@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const api = axios.create({
   baseURL: "https://app.starbuzz.space/api/v2",
@@ -23,6 +24,8 @@ api.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.removeItem("token");
       sessionStorage.removeItem("userDetails");
+      Cookies.remove("token");
+      Cookies.remove("user");
       window.location.href = "/login";
     }
     return Promise.reject(error);

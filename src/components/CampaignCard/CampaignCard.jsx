@@ -220,7 +220,7 @@ const CampaignCard = ({ data }) => {
             <Tooltip title="Edit">
               <Link
                 href={{
-                  pathname: `/campaigns/createcampaign`,
+                  pathname: `/campaigns/createCampaign`,
                   query: { id: data?.id },
                 }}
               >
