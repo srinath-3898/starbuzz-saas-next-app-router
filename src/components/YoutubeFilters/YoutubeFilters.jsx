@@ -155,13 +155,13 @@ const YoutubeFilters = ({
 
             {/* influnecer Age slider */}
 
-            <div className={`${styles.filter}`}>
+            <div className={styles.filter}>
               <div className={styles.heading}>
-                <p className={`text_small `}>
+                <p className={`text_small`}>
                   Influencer Age ({bodyData?.account_age?.from}-
                   {bodyData?.account_age?.to})
                 </p>
-                <Tooltip title={"Age groups of the audience of the influencer"}>
+                <Tooltip title={"Age of the influencer"}>
                   <InfoCircleOutlined
                     style={{ fontSize: 16, cursor: "pointer" }}
                   />
@@ -182,19 +182,21 @@ const YoutubeFilters = ({
                   )
                 }
               >
-                <TwoWaySlider
-                  disabled={subscription?.plan?.name === "free"}
-                  value={[
-                    bodyData?.account_age?.from,
-                    bodyData?.account_age?.to,
-                  ]}
-                  onChange={(value) => {
-                    setBodyData((prevState) => ({
-                      ...prevState,
-                      account_age: { from: value[0], to: value[1] },
-                    }));
-                  }}
-                />
+                <div>
+                  <TwoWaySlider
+                    disabled={subscription?.plan?.name === "free"}
+                    value={[
+                      bodyData?.account_age?.from,
+                      bodyData?.account_age?.to,
+                    ]}
+                    onChange={(value) => {
+                      setBodyData((prevState) => ({
+                        ...prevState,
+                        account_age: { from: value[0], to: value[1] },
+                      }));
+                    }}
+                  />
+                </div>
               </Tooltip>
             </div>
 
@@ -313,12 +315,11 @@ const YoutubeFilters = ({
                   )
                 }
               >
-                <SingleSelect
+                <Select
+                  placeholder="Subscribers Range"
                   options={followersRanges}
-                  placeHolder={"Subscribers Range"}
-                  selectedOption={bodyData?.subscribers_count}
-                  optionLabel={"label"}
-                  optionValue={"value"}
+                  value={bodyData?.subscribers_count}
+                  disabled={subscription?.plan?.name === "free"}
                   onChange={(value) => {
                     setBodyData((prevState) => ({
                       ...prevState,
@@ -331,13 +332,13 @@ const YoutubeFilters = ({
 
             {/* Post Price Slider */}
 
-            <div className={`${styles.filter}`}>
+            <div className={styles.filter}>
               <div className={styles.heading}>
-                <p className={`text_small `}>
+                <p className={`text_small`}>
                   Post Price ({bodyData?.blogger_prices?.post_price?.from} -{" "}
                   {bodyData?.blogger_prices?.post_price?.to})
                 </p>
-                <Tooltip title={"The price of the post"}>
+                <Tooltip title={"Age of the influencer"}>
                   <InfoCircleOutlined
                     style={{ fontSize: 16, cursor: "pointer" }}
                   />
@@ -358,21 +359,23 @@ const YoutubeFilters = ({
                   )
                 }
               >
-                <TwoWaySlider
-                  disabled={subscription?.plan?.name === "free"}
-                  value={[
-                    bodyData?.blogger_prices?.post_price?.from,
-                    bodyData?.blogger_prices?.post_price?.to,
-                  ]}
-                  onChange={(value) => {
-                    setBodyData((prevState) => ({
-                      ...prevState,
-                      blogger_prices: {
-                        post_price: { from: value[0], to: value[1] },
-                      },
-                    }));
-                  }}
-                />
+                <div>
+                  <TwoWaySlider
+                    disabled={subscription?.plan?.name === "free"}
+                    value={[
+                      bodyData?.blogger_prices?.post_price?.from,
+                      bodyData?.blogger_prices?.post_price?.to,
+                    ]}
+                    onChange={(value) => {
+                      setBodyData((prevState) => ({
+                        ...prevState,
+                        blogger_prices: {
+                          post_price: { from: value[0], to: value[1] },
+                        },
+                      }));
+                    }}
+                  />
+                </div>
               </Tooltip>
             </div>
 
