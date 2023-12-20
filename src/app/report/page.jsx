@@ -28,13 +28,13 @@ const Report = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const profilePic = useSearchParams().getAll("profilePic");
-  const name = useSearchParams().getAll("name");
-  const username = useSearchParams().getAll("username");
-  const followers = useSearchParams().getAll("followers");
-  const realFollowers = useSearchParams().getAll("realFollowers");
-  const er = useSearchParams().getAll("er");
-  const sbScore = useSearchParams().getAll("sbScore");
+  const profilePic = useSearchParams().get("profilePic");
+  const name = useSearchParams().get("name");
+  const username = useSearchParams().get("username");
+  const followers = useSearchParams().get("followers");
+  const realFollowers = useSearchParams().get("realFollowers");
+  const er = useSearchParams().get("er");
+  const sbScore = useSearchParams().get("sbScore");
 
   const {
     loading: authLoading,
