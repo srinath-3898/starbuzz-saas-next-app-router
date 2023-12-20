@@ -165,7 +165,6 @@ const BillingAddressModal = ({
 
   useEffect(() => {
     if (organisation) {
-      console.log(organisation);
       setBillingAddressFormData({
         ...organisation,
         country: "INDIA",

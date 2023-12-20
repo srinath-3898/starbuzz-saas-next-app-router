@@ -39,7 +39,7 @@ const Campaigns = () => {
               <p className={`text_large bold`}>List of campaigns </p>
             )}
             <button
-              onClick={() => router.push(`/campaigns/createcampaign`)}
+              onClick={() => router.push(`campaign`)}
               className={`btn_small btn_primary`}
             >
               Create Campaign

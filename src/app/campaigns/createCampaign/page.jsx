@@ -16,14 +16,17 @@ import { resetCUDCampaignData } from "@/store/campaign/campaignSlice";
 import Loader from "@/components/Loader/Loader";
 import MultiSelect from "@/components/MultiSelect/MultiSelect";
 import SingleSelect from "@/components/SingleSelect/SingleSelect";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const CreateCampaign = () => {
   const router = useRouter();
 
   const dispatch = useDispatch();
 
-  const { id } = useParams();
+  const id = useSearchParams().get("id");
+
+  console.log(id);
+
   const { instagramNiches, platforms } = useSelector((state) => state.taxanomy);
   const { loading, campaign, error, cudCampaignLoading, cudCampaignError } =
     useSelector((state) => state.campaign);

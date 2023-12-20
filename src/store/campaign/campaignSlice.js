@@ -163,7 +163,6 @@ export const campaignSlice = createSlice({
         state.errorCode = null;
       })
       .addCase(createCampaign.rejected, (state, { payload }) => {
-        console.log(payload);
         state.cudCampaignLoading = false;
         state.cudCampaignMessage = null;
         state.errorCode = payload?.response?.status;
@@ -316,9 +315,6 @@ export const campaignSlice = createSlice({
       .addCase(startCampaign.fulfilled, (state, { payload }) => {
         state.campaignStartLoading = false;
         state.campaignStartMessage = payload?.data?.message;
-        console.log(payload?.data?.message);
-        console.log(payload);
-
         state.campaignStartError = null;
         state.errorCode = null;
       })
@@ -344,7 +340,6 @@ export const campaignSlice = createSlice({
       .addCase(updateCampaignDetails.fulfilled, (state, { payload }) => {
         state.updateCampaignDetailsLoading = false;
         state.updateCampaignDetailsMessage = payload?.data?.message;
-        console.log(payload?.data?.message);
         state.updateCampaignDetailsError = null;
         state.errorCode = null;
       })

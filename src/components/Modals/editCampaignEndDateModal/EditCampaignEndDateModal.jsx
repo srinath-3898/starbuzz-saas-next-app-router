@@ -38,10 +38,8 @@ const EditCampaignEndDateModal = ({ open, setOpen, enddate }) => {
 
   useEffect(() => {
     if (enddate) {
-      console.log(enddate);
       const date = formatPostDate(enddate);
       setcampaignEndDate(date);
-      console.log(date);
     }
   }, [enddate, open]);
   const handleSave = () => {

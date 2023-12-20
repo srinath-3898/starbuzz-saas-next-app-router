@@ -36,8 +36,8 @@ const PostMetrics = () => {
   const router = useRouter();
 
   const { id } = useParams();
-  const username = useSearchParams().getAll("username");
-  const postId = useSearchParams().getAll("postId");
+  const username = useSearchParams().get("username");
+  const postId = useSearchParams().get("postId");
   const [messageApi, contextHolder] = message.useMessage();
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);

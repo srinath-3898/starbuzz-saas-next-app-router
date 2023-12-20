@@ -72,7 +72,7 @@ const Header = () => {
           <p className="text_small">Create Role</p>
         </div>
       ) : (
-        <Link href="/campaigns/createcampaign">
+        <Link href="/campaigns/createCampaign">
           <div className={styles.item}>
             <PlusCircleOutlined style={{ fontSize: "20px" }} />
             <p className="text_small">Create Campaign</p>
@@ -141,7 +141,7 @@ const Header = () => {
     {
       key: "4",
       label: isAdmin ? (
-        <Link href="/campaigns/createcampaign">
+        <Link href="/campaigns/createCampaign">
           <div className={styles.item}>
             <PlusCircleOutlined style={{ fontSize: "20px" }} />
             <p className="text_small">Create Campaign</p>

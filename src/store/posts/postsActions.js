@@ -123,7 +123,6 @@ export const updatePost = createAsyncThunk(
           postType,
         }
       );
-      console.log(postType);
       return response;
     } catch (error) {
       return rejectWithValue(error);

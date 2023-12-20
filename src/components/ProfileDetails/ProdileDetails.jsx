@@ -40,7 +40,6 @@ const ProfileDetails = () => {
               onClick={() => {
                 Cookies.remove("token");
                 Cookies.remove("user");
-                dispatch(resetAuthState());
                 localStorage.clear();
                 sessionStorage.clear();
                 window.location.href = "/login";

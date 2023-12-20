@@ -487,7 +487,7 @@ const Campaign = () => {
                 <button
                   onClick={() => {
                     router.push({
-                      pathname: `/campaigns/createcampaign`,
+                      pathname: `/campaigns/createCampaign`,
                       query: { id: id },
                     });
                   }}
@@ -495,12 +495,6 @@ const Campaign = () => {
                 >
                   Edit
                 </button>
-                {/* <button
-                  onClick={() => setDeleteCampaignModalOpen(true)}
-                  className={`btn_small btn_primary`}
-                >
-                  Delete
-                </button> */}
               </div>
             </div>
             <div className={styles.container_2}>
@@ -712,7 +706,6 @@ const Campaign = () => {
         }}
         footer={[]}
       >
-        {" "}
         <p className="text_medium">{notes ? notes : "No notes added"}</p>
       </Modal>
       <EditCampaignEndDateModal
