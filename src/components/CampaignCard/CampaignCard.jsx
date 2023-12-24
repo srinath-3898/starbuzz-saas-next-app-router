@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CampaignCard.module.css";
 import tiktok from "../../.../../assets/svgs/tiktok.svg";
+import robot from "./../../assets/svgs/robot.svg";
 import {
   CalendarOutlined,
   CheckCircleOutlined,
@@ -96,11 +97,25 @@ const CampaignCard = ({ data }) => {
   return (
     <>
       {contextHolder}
-      <div
-        className={styles.container}
-        style={{ borderColor: data?.is_automated ? "#ff5900" : "" }}
-      >
+      <div className={styles.container}>
         <div className={styles.box}>
+          <p className={`text_small ${styles.id}`} style={{ color: "blue" }}>
+            # {data?.id}{" "}
+            {data?.is_automated === true && (
+              <Image src={robot} alt="robot" width={18} />
+            )}{" "}
+            {data?.is_automated === true && `Automated`}
+          </p>
+          <Link
+            href={{
+              pathname: `/campaigns/${data?.id}`,
+            }}
+            className={`text_extra_large ${styles.campaign_name}`}
+          >
+            <Tooltip title={data?.title}>{data?.title}</Tooltip>
+          </Link>
+        </div>
+        {/* <div className={styles.box}>
           <p className="text_small" style={{ color: "blue" }}>
             # {data?.id}
           </p>
@@ -112,7 +127,7 @@ const CampaignCard = ({ data }) => {
           >
             <Tooltip title={data?.title}>{data?.title}</Tooltip>
           </Link>
-        </div>
+        </div> */}
         <div className={styles.box}>
           <p className="text_small">Status</p>
           <div className={styles.status}>

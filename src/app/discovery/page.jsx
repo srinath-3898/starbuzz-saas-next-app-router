@@ -221,11 +221,22 @@ const Discovery = () => {
               autoAdjustOverflow
             >
               <Link
-                href={"#"}
+                href={{
+                  pathname: "/report/youtube",
+                  query: {
+                    profilePic: record?.avatar_url,
+                    name: record?.name,
+                    username: record?.username,
+                    followers: record?.followers,
+                    realFollowers: record?.realFollowers,
+                    er: record?.er,
+                    sbScore: record?.sbScore,
+                  },
+                }}
+                target="_blank"
                 style={{
                   textDecoration: "underline",
-                  color: "grey",
-                  cursor: "not-allowed",
+                  color: "#fe5900",
                 }}
               >
                 View report
@@ -627,9 +638,29 @@ const Discovery = () => {
           <Radio checked={isInstagram} onChange={handleInstaClick}>
             Instagram
           </Radio>
-          <Radio checked={!isInstagram} onChange={handleYoutubeClick}>
-            Youtube
-          </Radio>
+          <Tooltip
+            title={
+              subscription?.plan?.name === "free" ? (
+                <span>
+                  Please{" "}
+                  <Link href="/subscription" style={{ color: "#fe5900" }}>
+                    Upgrade
+                  </Link>{" "}
+                  your plan to unlock this filter.
+                </span>
+              ) : (
+                ""
+              )
+            }
+          >
+            <Radio
+              checked={!isInstagram}
+              onChange={handleYoutubeClick}
+              disabled={subscription?.plan?.name === "free"}
+            >
+              Youtube
+            </Radio>
+          </Tooltip>
         </div>
         {subscription && subscription?.plan?.name !== "free" ? (
           <RecentSearches isInstagram={isInstagram} />

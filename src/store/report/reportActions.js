@@ -51,3 +51,20 @@ export const checkReportGenerated = createAsyncThunk(
     }
   }
 );
+
+export const getYoutubeReport = createAsyncThunk(
+  "influencerReport/getYoutubeReport",
+  async ({ brandId, username }, { rejectWithValue }) => {
+    try {
+      api.defaults.headers.common["Authorization"] = ` ${localStorage.getItem(
+        "token"
+      )}`;
+      const response = await api.post(
+        `/user/brand/2/yt/repor/TechnoGamerzOfficial`
+      );
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
