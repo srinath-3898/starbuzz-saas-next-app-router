@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 30em;
+}
+.container_1 {
+  display: flex;
+  justify-content: center;
+}
+.container_2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.profile_pic {
+  border-radius: 50%;
+}
+
+.container_3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
