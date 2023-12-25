@@ -3,6 +3,7 @@ import {
   checkReportGenerated,
   getFreemiumReport,
   getReport,
+  getYoutubeReport,
 } from "./reportActions";
 
 const initialState = {
@@ -13,6 +14,11 @@ const initialState = {
   reportMessage: null,
   error: null,
   errorCode: null,
+
+  youtubeReportLoading: false,
+  youtubeReport: null,
+  youtubeReportError: null,
+  youtubeReportErrorCode: null,
 };
 
 const reportSlice = createSlice({
@@ -25,6 +31,12 @@ const reportSlice = createSlice({
       state.report = null;
       state.error = null;
       state.errorCode = null;
+    },
+    resetYoutubeReportData: (state) => {
+      state.youtubeReportLoading = false;
+      state.youtubeReport = null;
+      state.youtubeReportErrorCode = null;
+      state.youtubeReportError = null;
     },
   },
   extraReducers: (builder) => {
@@ -97,6 +109,32 @@ const reportSlice = createSlice({
           state.error = payload?.response?.data?.message;
         } else {
           state.error = payload?.message;
+        }
+      });
+    //youtube report download
+    builder
+      .addCase(getYoutubeReport.pending, (state) => {
+        state.youtubeReportLoading = true;
+        state.youtubeReport = null;
+        state.youtubeReportError = null;
+        state.youtubeReportErrorCode = null;
+      })
+      .addCase(getYoutubeReport.fulfilled, (state, { payload }) => {
+        state.youtubeReportLoading = false;
+        state.youtubeReport = payload?.data?.result?.report;
+        state.hasEnoughCredits = payload?.data?.hadEnoughCredits;
+        state.reportMessage = payload?.data.message;
+        state.youtubeReportError = null;
+        state.youtubeReportErrorCode = null;
+      })
+      .addCase(getYoutubeReport.rejected, (state, { payload }) => {
+        state.youtubeReportLoading = false;
+        state.youtubeReport = null;
+        state.youtubeReportErrorCode = payload?.response?.status;
+        if (payload?.response?.data?.message) {
+          state.youtubeReportError = payload?.response?.data?.message;
+        } else {
+          state.youtubeReportError = payload?.message;
         }
       });
   },

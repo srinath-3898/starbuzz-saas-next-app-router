@@ -1,4 +1,5 @@
 "use client";
+import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Users.module.css";
 import { useEffect, useState } from "react";
@@ -13,11 +14,31 @@ import {
 import { deleteUser } from "@/store/user/userActions";
 import { resetCUDUserData } from "@/store/user/userSlice";
 import { useRouter } from "next/navigation";
-import Loader from "@/components/Loader/Loader";
-import Error from "@/components/Error/Error";
-import Pagination from "@/components/Pagination/Pagination";
-import PushToSubscriptionModal from "@/components/Modals/PushToSubscriptionModal/PushToSubscriptionModal";
-import CreateUpdateUserModal from "@/components/Modals/CreateUpdateUserModal/CreateUpdateUserModal";
+// import Loader from "@/components/Loader/Loader";
+// import Error from "@/components/Error/Error";
+// import Pagination from "@/components/Pagination/Pagination";
+// import PushToSubscriptionModal from "@/components/Modals/PushToSubscriptionModal/PushToSubscriptionModal";
+// import CreateUpdateUserModal from "@/components/Modals/CreateUpdateUserModal/CreateUpdateUserModal";
+
+const Loader = dynamic(() => import("../../components/Loader/Loader"));
+const Error = dynamic(() => import("../../components/Error/Error"), {
+  ssr: false,
+});
+const Pagination = dynamic(() =>
+  import("../../components/Pagination/Pagination")
+);
+const PushToSubscriptionModal = dynamic(() =>
+  import(
+    "../../components/Modals/PushToSubscriptionModal/PushToSubscriptionModal"
+  )
+);
+const CreateUpdateUserModal = dynamic(
+  () =>
+    import(
+      "../../components/Modals/CreateUpdateUserModal/CreateUpdateUserModal"
+    ),
+  { ssr: false }
+);
 
 const Users = () => {
   const router = useRouter();

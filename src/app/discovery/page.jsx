@@ -1,8 +1,9 @@
 "use client";
+import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Discovery.module.css";
 import { useEffect, useRef, useState } from "react";
-import { Radio, Table, Tooltip } from "antd";
+import { ConfigProvider, Empty, Radio, Table, Tooltip } from "antd";
 import {
   InstagramOutlined,
   LeftOutlined,
@@ -26,16 +27,38 @@ import {
   getFreemiumInfluencers,
   getFreemiumYoutubeInfluencers,
 } from "@/store/discovery/discoveryActions";
-import ListsIcon from "@/components/ListsIcon/ListsIcon";
-import CampaignsIcon from "@/components/CampaignsIcon/CampaignsIcon";
-import CustomDropdown from "@/components/CustomDropdown/CustomDropdown";
-import RecentSearches from "@/components/RecentSearches/RecentSearches";
-import InstagramFilters from "@/components/InstagramFilters/InstagramFilters";
-import YoutubeFilters from "@/components/YoutubeFilters/YoutubeFilters";
-import Loader from "@/components/Loader/Loader";
-import Error from "@/components/Error/Error";
-import PushToSubscriptionModal from "@/components/Modals/PushToSubscriptionModal/PushToSubscriptionModal";
-import AddInfluencerModal from "@/components/Modals/AddInfluencerModal/AddInfluencer";
+
+const ListsIcon = dynamic(() => import("@/components/ListsIcon/ListsIcon"));
+const CampaignsIcon = dynamic(() =>
+  import("@/components/CustomDropdown/CustomDropdown")
+);
+const CustomDropdown = dynamic(() =>
+  import("@/components/CustomDropdown/CustomDropdown")
+);
+const RecentSearches = dynamic(
+  () => import("@/components/RecentSearches/RecentSearches"),
+  { ssr: false }
+);
+const InstagramFilters = dynamic(
+  () => import("@/components/InstagramFilters/InstagramFilters"),
+  { ssr: false }
+);
+const YoutubeFilters = dynamic(
+  () => import("@/components/YoutubeFilters/YoutubeFilters"),
+  { ssr: false }
+);
+const Loader = dynamic(() => import("../../components/Loader/Loader"));
+const Error = dynamic(() => import("../../components/Error/Error"), {
+  ssr: false,
+});
+const PushToSubscriptionModal = dynamic(() =>
+  import(
+    "../../components/Modals/PushToSubscriptionModal/PushToSubscriptionModal"
+  )
+);
+const AddInfluencerModal = dynamic(() =>
+  import("../../components/Modals/AddInfluencerModal/AddInfluencer")
+);
 
 const Discovery = () => {
   const dispatch = useDispatch();
@@ -63,7 +86,6 @@ const Discovery = () => {
     youtubeInfluencersMessage,
     youtubeInfluencersError,
     youtubeInfluencersErrorCode,
-
     recentSearchLoading,
     recentSearchInfluencers,
     recentSearchBody,
@@ -222,11 +244,16 @@ const Discovery = () => {
               autoAdjustOverflow
             >
               <Link
-                href={"#"}
+                href={{
+                  pathname: "/report/youtube",
+                  query: {
+                    username: record?.username,
+                  },
+                }}
+                // target="_blank"
                 style={{
                   textDecoration: "underline",
-                  color: "grey",
-                  cursor: "not-allowed",
+                  color: "#fe5900",
                 }}
               >
                 View report
@@ -628,9 +655,29 @@ const Discovery = () => {
           <Radio checked={isInstagram} onChange={handleInstaClick}>
             Instagram
           </Radio>
-          <Radio checked={!isInstagram} onChange={handleYoutubeClick}>
-            Youtube
-          </Radio>
+          <Tooltip
+            title={
+              subscription?.plan?.name === "free" ? (
+                <span>
+                  Please{" "}
+                  <Link href="/subscription" style={{ color: "#fe5900" }}>
+                    Upgrade
+                  </Link>{" "}
+                  your plan to unlock this filter.
+                </span>
+              ) : (
+                ""
+              )
+            }
+          >
+            <Radio
+              checked={!isInstagram}
+              onChange={handleYoutubeClick}
+              disabled={subscription?.plan?.name === "free"}
+            >
+              Youtube
+            </Radio>
+          </Tooltip>
         </div>
         {subscription && subscription?.plan?.name !== "free" ? (
           <RecentSearches isInstagram={isInstagram} />
@@ -674,36 +721,27 @@ const Discovery = () => {
         recentSearchInfluencers ||
         freemiumYoutubeInfluencers ? (
           <div ref={tableRef} className={styles.influencers_table}>
-            <Table
-              scroll={{ y: 350 }}
-              columns={coloumns}
-              dataSource={
-                influencers
-                  ? influencers?.search_results?.map((influencer) => ({
-                      avatar_url: influencer?.basic?.avatar_url,
-                      full_name: influencer?.basic?.title,
-                      username: influencer?.basic?.username,
-                      followers: influencer?.metrics?.subscribers_count?.value,
-                      realFollowers:
-                        influencer?.metrics?.real_subscribers_count?.value,
-                      er: influencer?.metrics?.er?.value,
-                      sbScore: influencer?.features?.aqs?.data?.mark,
-                    }))
-                  : youtubeInfluencers
-                  ? youtubeInfluencers?.search_results?.map((influencer) => ({
-                      avatar_url: influencer?.basic?.avatar_url,
-                      full_name: influencer?.basic?.title,
-                      username: influencer?.basic?.username,
-                      followers: influencer?.metrics?.subscribers_count?.value,
-                      realFollowers:
-                        influencer?.metrics?.real_subscribers_count?.value,
-                      sbScore: influencer?.features?.cqs?.data?.mark,
-                    }))
-                  : freemiumInfluencers
-                  ? freemiumInfluencers?.data
-                  : recentSearchInfluencers
-                  ? recentSearchInfluencers?.search_results?.map(
-                      (influencer) => ({
+            <ConfigProvider
+              renderEmpty={() => {
+                return (
+                  <Empty
+                    // image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    description={
+                      <p className="text_medium">
+                        No Influencers found with above filters, please try
+                        applying different filters.
+                      </p>
+                    }
+                  />
+                );
+              }}
+            >
+              <Table
+                scroll={{ y: 350 }}
+                columns={coloumns}
+                dataSource={
+                  influencers
+                    ? influencers?.search_results?.map((influencer) => ({
                         avatar_url: influencer?.basic?.avatar_url,
                         full_name: influencer?.basic?.title,
                         username: influencer?.basic?.username,
@@ -713,21 +751,49 @@ const Discovery = () => {
                           influencer?.metrics?.real_subscribers_count?.value,
                         er: influencer?.metrics?.er?.value,
                         sbScore: influencer?.features?.aqs?.data?.mark,
-                      })
-                    )
-                  : freemiumYoutubeInfluencers?.data
-              }
-              rowKey={"username"}
-              pagination={false}
-              loading={{
-                indicator: <Loader />,
-                spinning:
-                  loading ||
-                  youtubeInfluencersLoading ||
-                  getFreemiumInfluencersLoading ||
-                  getFreemiumYoutubeInfluencersLoading,
-              }}
-            />
+                      }))
+                    : youtubeInfluencers
+                    ? youtubeInfluencers?.search_results?.map((influencer) => ({
+                        avatar_url: influencer?.basic?.avatar_url,
+                        full_name: influencer?.basic?.title,
+                        username: influencer?.basic?.username,
+                        followers:
+                          influencer?.metrics?.subscribers_count?.value,
+                        realFollowers:
+                          influencer?.metrics?.real_subscribers_count?.value,
+                        sbScore: influencer?.features?.cqs?.data?.mark,
+                      }))
+                    : freemiumInfluencers
+                    ? freemiumInfluencers?.data
+                    : recentSearchInfluencers
+                    ? recentSearchInfluencers?.search_results?.map(
+                        (influencer) => ({
+                          avatar_url: influencer?.basic?.avatar_url,
+                          full_name: influencer?.basic?.title,
+                          username: influencer?.basic?.username,
+                          followers:
+                            influencer?.metrics?.subscribers_count?.value,
+                          realFollowers:
+                            influencer?.metrics?.real_subscribers_count?.value,
+                          er: influencer?.metrics?.er?.value,
+                          sbScore: influencer?.features?.aqs?.data?.mark,
+                        })
+                      )
+                    : freemiumYoutubeInfluencers?.data
+                }
+                rowKey={"username"}
+                pagination={false}
+                loading={{
+                  indicator: <Loader />,
+                  spinning:
+                    loading ||
+                    youtubeInfluencersLoading ||
+                    getFreemiumInfluencersLoading ||
+                    getFreemiumYoutubeInfluencersLoading,
+                }}
+              />
+            </ConfigProvider>
+
             <div className={styles.pagination}>
               <Tooltip title="Previous Page">
                 <button
@@ -835,18 +901,18 @@ const Discovery = () => {
                     getFreemiumInfluencersLoading ||
                     getFreemiumYoutubeInfluencersLoading ||
                     (recentSearchInfluencers &&
-                      recentSearchInfluencers?.current_page ===
+                      recentSearchInfluencers?.current_page >=
                         recentSearchInfluencers?.total_pages) ||
                     (influencers &&
-                      influencers?.current_page === influencers?.total_pages) ||
+                      influencers?.current_page >= influencers?.total_pages) ||
                     (youtubeInfluencers &&
-                      youtubeInfluencers?.current_page ===
+                      youtubeInfluencers?.current_page >=
                         youtubeInfluencers?.total_pages) ||
                     (freemiumInfluencers &&
-                      freemiumInfluencers?.current_page ===
+                      freemiumInfluencers?.current_page >=
                         freemiumInfluencers?.last_page) ||
                     (freemiumYoutubeInfluencers &&
-                      freemiumYoutubeInfluencers?.current_page ===
+                      freemiumYoutubeInfluencers?.current_page >=
                         freemiumYoutubeInfluencers?.last_page)
                   }
                 >
@@ -858,19 +924,19 @@ const Discovery = () => {
                         youtubeInfluencersLoading ||
                         getFreemiumInfluencersLoading ||
                         (recentSearchInfluencers &&
-                          recentSearchInfluencers?.current_page ===
+                          recentSearchInfluencers?.current_page >=
                             recentSearchInfluencers?.total_pages) ||
                         (influencers &&
-                          influencers?.current_page ===
+                          influencers?.current_page >=
                             influencers?.total_pages) ||
                         (youtubeInfluencers &&
-                          youtubeInfluencers?.current_page ===
+                          youtubeInfluencers?.current_page >=
                             youtubeInfluencers?.total_pages) ||
                         (freemiumYoutubeInfluencers &&
-                          freemiumYoutubeInfluencers?.current_page ===
+                          freemiumYoutubeInfluencers?.current_page >=
                             freemiumYoutubeInfluencers?.last_page) ||
                         (freemiumInfluencers &&
-                          freemiumInfluencers?.current_page ===
+                          freemiumInfluencers?.current_page >=
                             freemiumInfluencers?.last_page)
                           ? "#cccccc"
                           : "#fe5900",

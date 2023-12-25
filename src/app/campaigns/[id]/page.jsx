@@ -484,17 +484,14 @@ const Campaign = () => {
                 <></>
               )}{" "}
               <div className={styles.container_1_box_2}>
-                <button
-                  onClick={() => {
-                    router.push({
-                      pathname: `/campaigns/createCampaign`,
-                      query: { id: id },
-                    });
+                <Link
+                  href={{
+                    pathname: `/campaigns/createCampaign`,
+                    query: { id: campaign?.id },
                   }}
-                  className={`btn_small btn_primary`}
                 >
-                  Edit
-                </button>
+                  <button className={`btn_small btn_primary`}>Edit</button>
+                </Link>
               </div>
             </div>
             <div className={styles.container_2}>

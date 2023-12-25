@@ -12,6 +12,7 @@ const CampaignAutomationInfoModal = ({
   };
   const handleOk = () => {
     setBillingAddressModalOpen(true);
+    setOpen(false);
   };
 
   return (

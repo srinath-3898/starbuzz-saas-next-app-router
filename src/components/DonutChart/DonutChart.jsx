@@ -1,13 +1,13 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-const DonutChart = ({ options, series }) => {
+const DonutChart = ({ options, series, height = 400 }) => {
   return (
     <ReactApexChart
       options={options}
       series={series}
       type="donut"
-      height={400}
+      height={height}
     />
   );
 };

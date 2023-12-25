@@ -1,0 +1,31 @@
+.container {
+  width: 70%;
+  margin: auto;
+  margin-top: 10px;
+  padding: 20px;
+  display: grid;
+  grid-gap: 20px;
+  gap: 20px;
+  position: relative;
+  border: 2px solid #e7e7e7;
+  border-radius: 5px;
+  box-shadow: inset 0 0 10px #e7e7e7;
+}
+.scores_1 {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 30em;
+}
+.scores_1_container_1 {
+  display: flex;
+  justify-content: center;
+}
+.scores_1_container_2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.profile_pic {
+  border-radius: 50%;
+}
