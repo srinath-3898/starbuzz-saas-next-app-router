@@ -60,7 +60,7 @@ export const getYoutubeReport = createAsyncThunk(
         "token"
       )}`;
       const response = await api.post(
-        `/user/brand/2/yt/repor/TechnoGamerzOfficial`
+        `/user/brand/${brandId}/yt/report/${username}`
       );
       return response?.data;
     } catch (error) {

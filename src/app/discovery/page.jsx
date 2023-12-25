@@ -224,13 +224,7 @@ const Discovery = () => {
                 href={{
                   pathname: "/report/youtube",
                   query: {
-                    profilePic: record?.avatar_url,
-                    name: record?.name,
                     username: record?.username,
-                    followers: record?.followers,
-                    realFollowers: record?.realFollowers,
-                    er: record?.er,
-                    sbScore: record?.sbScore,
                   },
                 }}
                 target="_blank"

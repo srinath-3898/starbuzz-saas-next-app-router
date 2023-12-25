@@ -19,8 +19,7 @@ import Loader from "@/components/Loader/Loader";
 import Error from "@/components/Error/Error";
 
 const page = () => {
-  const profilePic = useSearchParams().get("profilePic");
-  const name = useSearchParams().get("name");
+  const username = useSearchParams().get("username");
   const dispatch = useDispatch();
   const {
     loading: authLoading,
@@ -38,7 +37,6 @@ const page = () => {
   const [youtubeInfluencer, setYoutubeInfluencer] = useState([]);
   const [pushToSubscriptionModalOpen, setPushToSubscriptionModalOpen] =
     useState(false);
-  const username = "";
 
   const convertToKorM = (count) => {
     if (count >= 1000000) {
@@ -163,7 +161,7 @@ const page = () => {
         <div className={styles.container}>
           <>
             <PartOne influencer={youtubeInfluencer} />
-            <PartTwo influncer={youtubeInfluencer} />
+            <PartTwo influencer={youtubeInfluencer} />
             <PartThree influencer={youtubeInfluencer} />
             <PartFour influencer={youtubeInfluencer} />
             <PartFive influencer={youtubeInfluencer} />
