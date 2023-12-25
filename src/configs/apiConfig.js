@@ -1,4 +1,4 @@
-  import axios from "axios";
+import axios from "axios";
 import Cookies from "js-cookie";
 
 const api = axios.create({
@@ -10,6 +10,8 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const maintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
   if (maintenanceMode) {
+    Cookies.remove("token");
+    Cookies.remove("user");
     localStorage.clear();
     sessionStorage.clear();
     window.location.href = "/maintenance";

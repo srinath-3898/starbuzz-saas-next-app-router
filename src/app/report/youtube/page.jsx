@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "./youtube.module.css";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { getYoutubeReport } from "@/store/report/reportActions";
@@ -18,7 +17,7 @@ import PushToSubscriptionModal from "@/components/Modals/PushToSubscriptionModal
 import Loader from "@/components/Loader/Loader";
 import Error from "@/components/Error/Error";
 
-const page = () => {
+const YoutubeReport = () => {
   const username = useSearchParams().get("username");
   const dispatch = useDispatch();
   const {
@@ -193,4 +192,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default YoutubeReport;

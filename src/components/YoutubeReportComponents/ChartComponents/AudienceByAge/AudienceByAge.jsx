@@ -1,5 +1,7 @@
-import BarGraph from "@/components/BarGraph/BarGraph";
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+const BarGraph = dynamic(() => import("@/components/BarGraph/BarGraph"));
 
 const AudienceByAge = ({ influencer }) => {
   const [categories, setCategories] = useState(null);

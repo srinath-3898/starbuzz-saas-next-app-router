@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AudienceLanguages.module.css";
-import BarGraph from "@/components/BarGraph/BarGraph";
+import dynamic from "next/dynamic";
+
+const BarGraph = dynamic(() => import("@/components/BarGraph/BarGraph"));
 
 const AudienceLanguages = ({ influencer }) => {
   const [categories, setCategories] = useState([]);

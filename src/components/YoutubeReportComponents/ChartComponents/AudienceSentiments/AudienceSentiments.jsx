@@ -1,5 +1,7 @@
-import DonutChart from "@/components/DonutChart/DonutChart";
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+const DonutChart = dynamic(() => import("@/components/DonutChart/DonutChart"));
 
 const AudienceSentiments = ({ influencer }) => {
   const [labels, setLabels] = useState([]);

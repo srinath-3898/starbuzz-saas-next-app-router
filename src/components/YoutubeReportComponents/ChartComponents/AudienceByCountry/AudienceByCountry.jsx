@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import internet from "./../../../../assets/svgs/internet.svg";
 import Image from "next/image";
 import styles from "./AudienceByCountry.module.css";
-import BarGraph from "@/components/BarGraph/BarGraph";
+import dynamic from "next/dynamic";
+
+const BarGraph = dynamic(() => import("@/components/BarGraph/BarGraph"));
 
 const AudienceByCountry = ({ influencer }) => {
   const [categories, setCategories] = useState([]);

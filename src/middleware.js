@@ -43,5 +43,6 @@ export const config = {
     "/users",
     "/brands",
     "/appTour",
+    "/report/:path*",
   ],
 };

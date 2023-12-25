@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./PartOne.module.css";
 import Image from "next/image";
 import { CheckCircleFilled } from "@ant-design/icons";
