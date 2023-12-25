@@ -250,6 +250,27 @@ const CreateCampaign = () => {
     }
   }, [cudCampaignError]);
 
+  useEffect(() => {
+    if (!id) {
+      setFormData((prev) => ({
+        ...prev,
+
+        title: "",
+        description: "",
+        scope: "",
+        type_id: 1,
+        niche_ids: [],
+        platform_ids: [],
+        followers_range_from: "",
+        followers_range_to: "",
+        budget: "",
+      }));
+      setSelectedNiches([]);
+      setSelectedPlatforms([]);
+      setSelectedFollowersRange("");
+    }
+  }, [id]);
+
   return (
     <>
       {contextHolder}

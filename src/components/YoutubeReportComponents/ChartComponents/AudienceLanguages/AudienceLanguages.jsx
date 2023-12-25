@@ -11,7 +11,10 @@ const AudienceLanguages = ({ influencer }) => {
   const [series, setSeries] = useState([]);
 
   useEffect(() => {
-    if (influencer?.audience_languages) {
+    if (
+      influencer?.audience_languages &&
+      influencer?.audience_languages?.length > 0
+    ) {
       const categories = influencer?.audience_languages?.map(
         (item) => item?.title
       );
@@ -19,7 +22,7 @@ const AudienceLanguages = ({ influencer }) => {
       setCategories(categories);
       setData(data);
     }
-  }, [influencer?.audience_races]);
+  }, [influencer?.audience_languages]);
 
   useEffect(() => {
     if ((categories, data)) {
@@ -52,7 +55,7 @@ const AudienceLanguages = ({ influencer }) => {
   }, [categories, data]);
 
   return (
-    influencer?.audience_languages && (
+    influencer?.audience_languages?.length > 0 && (
       <div className={styles.container}>
         <p className="text_medium bold">Audience Languages</p>
         <BarGraph series={series} options={options} height={350} />
