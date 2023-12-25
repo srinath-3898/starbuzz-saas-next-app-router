@@ -69,14 +69,15 @@ const AudienceByAge = ({ influencer }) => {
       ]);
     }
   }, [categories, maleData, femaleData]);
+  console.log(influencer?.audience_age_gender);
 
-  return (
-    influencer?.audience_age_gender && (
-      <>
-        <p className="text_medium bold">Audience By Age</p>
-        <BarGraph options={options} series={series} />
-      </>
-    )
+  return Object.entries(influencer?.audience_age_gender || {}).length > 0 ? (
+    <>
+      <p className="text_medium bold">Audience By Age</p>
+      <BarGraph options={options} series={series} />
+    </>
+  ) : (
+    <></>
   );
 };
 

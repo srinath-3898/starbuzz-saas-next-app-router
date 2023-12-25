@@ -13,7 +13,7 @@ const AudienceByCountry = ({ influencer }) => {
   const [series, setSeries] = useState([]);
 
   useEffect(() => {
-    if (influencer?.audience_geo) {
+    if (influencer.audience_geo && influencer.audience_geo.length > 0) {
       const categories = influencer?.audience_geo?.map((item) => item?.title);
       const data = influencer?.audience_geo?.map((item) => item?.prc);
       setCategories(categories);

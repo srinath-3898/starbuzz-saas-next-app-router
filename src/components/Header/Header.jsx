@@ -60,14 +60,7 @@ const Header = () => {
     {
       key: "1",
       label: isAdmin ? (
-        <div
-          className={styles.item}
-          onClick={() =>
-            router.push({
-              pathname: "/roles",
-            })
-          }
-        >
+        <div className={styles.item} onClick={() => router.push("/roles")}>
           <PlusCircleOutlined style={{ fontSize: "20px" }} />
           <p className="text_small">Create Role</p>
         </div>
@@ -84,38 +77,17 @@ const Header = () => {
       key: "2",
       label:
         isAdmin && !organisation?.isBrand ? (
-          <div
-            className={styles.item}
-            onClick={() =>
-              router.push({
-                pathname: "/brands",
-              })
-            }
-          >
+          <div className={styles.item} onClick={() => router.push("/brands")}>
             <PlusCircleOutlined style={{ fontSize: "20px" }} />
             <p className="text_small">Create Brand</p>
           </div>
         ) : organisation?.isBrand ? (
-          <div
-            className={styles.item}
-            onClick={() =>
-              router.push({
-                pathname: "/users",
-              })
-            }
-          >
+          <div className={styles.item} onClick={() => router.push("/users")}>
             <PlusCircleOutlined style={{ fontSize: "20px" }} />
             <p className="text_small">Create User</p>
           </div>
         ) : (
-          <div
-            className={styles.item}
-            onClick={() =>
-              router.push({
-                pathname: "/lists",
-              })
-            }
-          >
+          <div className={styles.item} onClick={() => router.push("/lists")}>
             <PlusCircleOutlined style={{ fontSize: "20px" }} />
             <p className="text_small">Create List</p>
           </div>
@@ -125,14 +97,7 @@ const Header = () => {
       key: "3",
       label:
         isAdmin && !organisation?.isBrand ? (
-          <div
-            className={styles.item}
-            onClick={() =>
-              router.push({
-                pathname: "/users",
-              })
-            }
-          >
+          <div className={styles.item} onClick={() => router.push("/users")}>
             <PlusCircleOutlined style={{ fontSize: "20px" }} />
             <p className="text_small">Create User</p>
           </div>
@@ -152,14 +117,7 @@ const Header = () => {
     {
       key: "5",
       label: isAdmin ? (
-        <div
-          className={styles.item}
-          onClick={() =>
-            router.push({
-              pathname: "/lists",
-            })
-          }
-        >
+        <div className={styles.item} onClick={() => router.push("/lists")}>
           <PlusCircleOutlined style={{ fontSize: "20px" }} />
           <p className="text_small">Create List</p>
         </div>
