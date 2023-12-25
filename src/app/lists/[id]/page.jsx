@@ -25,6 +25,7 @@ import { DeleteOutlined, InstagramOutlined } from "@ant-design/icons";
 import CampaignsIcon from "@/components/CampaignsIcon/CampaignsIcon";
 import { resetDeleteInfluencerFromListData } from "@/store/list/listSlice";
 import AddInfluencerModal from "@/components/Modals/AddInfluencerModal/AddInfluencer";
+import ExportToCSV from "@/components/ExportToCSV/ExportToCSV";
 
 const List = () => {
   const router = useRouter();
@@ -51,6 +52,8 @@ const List = () => {
   const [username, setUsername] = useState(null);
   const [messageApi, contextHolder] = message.useMessage();
 
+  console.log(influencers);
+
   const handleRemoveInfluencer = () => {
     dispatch(
       deleteInfluencerFromList({ brandId, username, listId: list?.id })
@@ -58,6 +61,10 @@ const List = () => {
       setUsername(null);
       dispatch(getInfluencers({ brandId, listId: list?.id, size, page: 1 }));
     });
+  };
+
+  const handleExport = () => {
+    ExportToCSV(influencers?.influencers, "influencers_list.csv");
   };
 
   const coloumns = [
@@ -232,12 +239,28 @@ const List = () => {
               <div className={styles.container_2}>
                 <div className={styles.container_2_box_1}>
                   <p className="text_medium bold">Influencers</p>
-                  <button
-                    className="btn_medium btn_primary"
-                    onClick={() => router.push("/discovery")}
+                  <div
+                    className={
+                      influencers?.total_records > 0 ? styles.export_btns : ""
+                    }
                   >
-                    Add influencers
-                  </button>
+                    <button
+                      className="btn_medium btn_primary"
+                      onClick={() => router.push("/discovery")}
+                    >
+                      Add influencers
+                    </button>
+                    {influencers?.total_records > 0 ? (
+                      <button
+                        className={`btn_small btn_secondary ${styles.export_btn_color}`}
+                        onClick={handleExport}
+                      >
+                        Export Influencers
+                      </button>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
                 <ConfigProvider
                   renderEmpty={() => (
