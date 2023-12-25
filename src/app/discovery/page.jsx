@@ -1,4 +1,5 @@
 "use client";
+import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Discovery.module.css";
 import { useEffect, useRef, useState } from "react";
@@ -26,16 +27,38 @@ import {
   getFreemiumInfluencers,
   getFreemiumYoutubeInfluencers,
 } from "@/store/discovery/discoveryActions";
-import ListsIcon from "@/components/ListsIcon/ListsIcon";
-import CampaignsIcon from "@/components/CampaignsIcon/CampaignsIcon";
-import CustomDropdown from "@/components/CustomDropdown/CustomDropdown";
-import RecentSearches from "@/components/RecentSearches/RecentSearches";
-import InstagramFilters from "@/components/InstagramFilters/InstagramFilters";
-import YoutubeFilters from "@/components/YoutubeFilters/YoutubeFilters";
-import Loader from "@/components/Loader/Loader";
-import Error from "@/components/Error/Error";
-import PushToSubscriptionModal from "@/components/Modals/PushToSubscriptionModal/PushToSubscriptionModal";
-import AddInfluencerModal from "@/components/Modals/AddInfluencerModal/AddInfluencer";
+
+const ListsIcon = dynamic(() => import("@/components/ListsIcon/ListsIcon"));
+const CampaignsIcon = dynamic(() =>
+  import("@/components/CustomDropdown/CustomDropdown")
+);
+const CustomDropdown = dynamic(() =>
+  import("@/components/CustomDropdown/CustomDropdown")
+);
+const RecentSearches = dynamic(
+  () => import("@/components/RecentSearches/RecentSearches"),
+  { ssr: false }
+);
+const InstagramFilters = dynamic(
+  () => import("@/components/InstagramFilters/InstagramFilters"),
+  { ssr: false }
+);
+const YoutubeFilters = dynamic(
+  () => import("@/components/YoutubeFilters/YoutubeFilters"),
+  { ssr: false }
+);
+const Loader = dynamic(() => import("../../components/Loader/Loader"));
+const Error = dynamic(() => import("../../components/Error/Error"), {
+  ssr: false,
+});
+const PushToSubscriptionModal = dynamic(() =>
+  import(
+    "../../components/Modals/PushToSubscriptionModal/PushToSubscriptionModal"
+  )
+);
+const AddInfluencerModal = dynamic(() =>
+  import("../../components/Modals/AddInfluencerModal/AddInfluencer")
+);
 
 const Discovery = () => {
   const dispatch = useDispatch();
