@@ -137,7 +137,7 @@ export const postsSlice = createSlice({
         state.errorCode = payload?.response?.data?.status;
         if (payload?.response?.data?.errors) {
           state.addPostError = payload?.response?.data?.errors[0]?.msg;
-        } else if (payload?.response?.data?.status) {
+        } else if (payload?.response?.data?.message) {
           state.addPostError = payload?.response?.data?.message;
         } else {
           state.addPostError = payload?.message;
