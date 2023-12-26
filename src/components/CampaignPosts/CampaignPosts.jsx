@@ -27,7 +27,7 @@ const CampaignPosts = ({ campaignId }) => {
         return (
           <Link
             href={{
-              pathname: `/campaigns/${record?.id}/campaignInfluencer/postMetrics`,
+              pathname: `/campaigns/${campaignId}/campaignInfluencer/postMetrics`,
               query: {
                 id: campaignId,
                 postId: record?.id,
