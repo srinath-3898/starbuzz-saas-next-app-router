@@ -42,8 +42,6 @@ const ReduxWrapper = ({ children }) => {
     ) {
       dispatch(setToken(localStorage.getItem("token")));
       dispatch(getUserDetails());
-    } else {
-      router.push("/login");
     }
   }, []);
 
