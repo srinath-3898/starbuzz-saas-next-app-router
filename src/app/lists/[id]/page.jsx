@@ -52,8 +52,6 @@ const List = () => {
   const [username, setUsername] = useState(null);
   const [messageApi, contextHolder] = message.useMessage();
 
-  console.log(influencers);
-
   const handleRemoveInfluencer = () => {
     dispatch(
       deleteInfluencerFromList({ brandId, username, listId: list?.id })
@@ -252,7 +250,7 @@ const List = () => {
                     </button>
                     {influencers?.total_records > 0 ? (
                       <button
-                        className={`btn_small btn_secondary ${styles.export_btn_color}`}
+                        className={`btn_medium btn_secondary ${styles.export_btn_color}`}
                         onClick={handleExport}
                       >
                         Export Influencers

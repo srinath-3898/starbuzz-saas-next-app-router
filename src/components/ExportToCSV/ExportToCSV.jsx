@@ -1,18 +1,18 @@
 import Papa from "papaparse";
 
-const flattenObject = (obj, parentKey = '') => {
-    return Object.keys(obj).reduce((acc, key) => {
-      const newKey = parentKey ? `${parentKey}.${key}` : key;
-      if (typeof obj[key] === 'object' && obj[key] !== null) {
-        Object.assign(acc, flattenObject(obj[key], newKey));
-      } else {
-        const leafKey = newKey.split('.').pop();
-        acc[leafKey] = obj[key];
-      }
-      return acc;
-    }, {});
-  };
-  
+const flattenObject = (obj, parentKey = "") => {
+  return Object.keys(obj).reduce((acc, key) => {
+    const newKey = parentKey ? `${parentKey}.${key}` : key;
+    if (typeof obj[key] === "object" && obj[key] !== null) {
+      Object.assign(acc, flattenObject(obj[key], newKey));
+    } else {
+      const leafKey = newKey.split(".").pop();
+      acc[leafKey] = obj[key];
+    }
+    return acc;
+  }, {});
+};
+
 const ExportToCSV = (data, filename) => {
   const flattenedData = data.map((item) => flattenObject(item));
 

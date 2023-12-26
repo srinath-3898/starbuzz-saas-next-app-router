@@ -250,7 +250,7 @@ const Discovery = () => {
                     username: record?.username,
                   },
                 }}
-                // target="_blank"
+                target="_blank"
                 style={{
                   textDecoration: "underline",
                   color: "#fe5900",

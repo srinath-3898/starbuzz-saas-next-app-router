@@ -38,6 +38,7 @@
 .container_2_box_1 {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .container_2_box_2 {
@@ -63,12 +64,12 @@
   cursor: pointer;
 }
 
-.export_btns{
+.export_btns {
   display: grid;
   grid-template-columns: 1fr 0.7fr;
   cursor: pointer;
   gap: 10px;
 }
-.export_btn_color{
+.export_btn_color {
   color: #ff5900;
 }
