@@ -43,7 +43,7 @@ export const generateReportPDF = createAsyncThunk(
         "token"
       )}`;
       const response = await api.post(
-        `/user/brand/${brandId}/report/pdf/${username}`
+        `/user/brand/${brandId}/ig/report/pdf/${username}`
       );
       return response;
     } catch (error) {

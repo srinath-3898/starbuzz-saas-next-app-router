@@ -8,15 +8,12 @@ export function middleware(request) {
   if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true") {
     return NextResponse.redirect(new URL("/maintenance", request.nextUrl));
   }
-
   if (!token && !isPublicPath) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
-
   if (isPublicPath && token) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
-
   if (!isPublicPath && token) {
     if (user) {
       user = JSON.parse(user);

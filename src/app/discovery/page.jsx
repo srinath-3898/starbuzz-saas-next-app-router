@@ -30,7 +30,7 @@ import {
 
 const ListsIcon = dynamic(() => import("@/components/ListsIcon/ListsIcon"));
 const CampaignsIcon = dynamic(() =>
-  import("@/components/CustomDropdown/CustomDropdown")
+  import("../../components/CampaignsIcon/CampaignsIcon")
 );
 const CustomDropdown = dynamic(() =>
   import("@/components/CustomDropdown/CustomDropdown")
