@@ -449,7 +449,6 @@ const Discovery = () => {
             delete discoverInfluencersBody.bodyData[key];
           }
         }
-        console.log(discoverInfluencersBody);
         dispatch(
           discoverInfluencers({ brandId, body: discoverInfluencersBody })
         );

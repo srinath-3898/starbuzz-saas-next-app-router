@@ -440,18 +440,7 @@ const InstagramFilters = ({
                       }));
                     }}
                     disabled={subscription?.plan?.name === "free"}
-                    // onChange={(value) => {
-                    //   setBodyData((prevState) => ({
-                    //     ...prevState,
-                    //     audience_geo: {
-                    //       ...prevState.audience_geo,
-                    //       cities: value,
-                    //     },
-                    //   }));
-                    // }}
-
                     onChange={(value) => {
-                      console.log(value);
                       if (bodyData?.audience_geo?.cities.length < 3) {
                         setBodyData((prevState) => ({
                           ...prevState,
