@@ -10,6 +10,7 @@ import { getUserDetails } from "@/store/auth/authActions";
 import Loader from "../Loader/Loader";
 import posthog from "posthog-js";
 import init from "@socialgouv/matomo-next";
+import Intercom from "../Intercom/Intercom";
 
 const ReduxWrapper = ({ children }) => {
   const MATOMO_URL = "https://matomo.innocreates.online";
@@ -62,42 +63,7 @@ const ReduxWrapper = ({ children }) => {
   }, []);
 
   return (
-    <div
-      className={`${
-        token &&
-        user &&
-        user?.isEmailVerified &&
-        user?.appTour &&
-        process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false"
-          ? styles.container
-          : ""
-      } ${navbarExpand ? styles.container_responsive : ""}`}
-    >
-      {token &&
-      user &&
-      user?.isEmailVerified &&
-      user?.appTour &&
-      process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
-        <div className={styles.navbar}>
-          <Navbar
-            handleClick={() => setNavbarExpand(!navbarExpand)}
-            navbarExpand={navbarExpand}
-          />
-        </div>
-      ) : (
-        <></>
-      )}
-      {token &&
-      user &&
-      user?.isEmailVerified &&
-      user?.appTour &&
-      process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
-        <div className={styles.header}>
-          <Header />
-        </div>
-      ) : (
-        <></>
-      )}
+    <>
       <div
         className={`${
           token &&
@@ -105,10 +71,35 @@ const ReduxWrapper = ({ children }) => {
           user?.isEmailVerified &&
           user?.appTour &&
           process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false"
-            ? styles.main
+            ? styles.container
             : ""
-        }`}
+        } ${navbarExpand ? styles.container_responsive : ""}`}
       >
+        {token &&
+        user &&
+        user?.isEmailVerified &&
+        user?.appTour &&
+        process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
+          <div className={styles.navbar}>
+            <Navbar
+              handleClick={() => setNavbarExpand(!navbarExpand)}
+              navbarExpand={navbarExpand}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
+        {token &&
+        user &&
+        user?.isEmailVerified &&
+        user?.appTour &&
+        process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
+          <div className={styles.header}>
+            <Header />
+          </div>
+        ) : (
+          <></>
+        )}
         <div
           className={`${
             token &&
@@ -116,41 +107,54 @@ const ReduxWrapper = ({ children }) => {
             user?.isEmailVerified &&
             user?.appTour &&
             process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false"
-              ? styles.content
+              ? styles.main
               : ""
           }`}
         >
-          {token && user && user?.isEmailVerified && user?.appTour ? (
-            <>{children}</>
-          ) : pathName === "login" ||
-            pathName === "signup" ||
-            pathName === "home" ||
-            pathName === "appTour" ? (
-            <>{children}</>
-          ) : loading ? (
-            <div className={styles.loading}>
-              <Loader size={50} />
+          <div
+            className={`${
+              token &&
+              user &&
+              user?.isEmailVerified &&
+              user?.appTour &&
+              process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false"
+                ? styles.content
+                : ""
+            }`}
+          >
+            {token && user && user?.isEmailVerified && user?.appTour ? (
+              <>{children}</>
+            ) : pathName === "login" ||
+              pathName === "signup" ||
+              pathName === "home" ||
+              pathName === "appTour" ? (
+              <>{children}</>
+            ) : loading ? (
+              <div className={styles.loading}>
+                <Loader size={50} />
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+          {token &&
+          user &&
+          user?.isEmailVerified &&
+          user?.appTour &&
+          process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
+            <div className={styles.footer}>
+              <p className="text_extra_small bold">
+                Copyright © Krisattva Pvt Ltd. All Right Reserved.
+              </p>
+              <p className="text_extra_small ">{"v2.4.1"}</p>
             </div>
           ) : (
             <></>
           )}
         </div>
-        {token &&
-        user &&
-        user?.isEmailVerified &&
-        user?.appTour &&
-        process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
-          <div className={styles.footer}>
-            <p className="text_extra_small bold">
-              Copyright © Krisattva Pvt Ltd. All Right Reserved.
-            </p>
-            <p className="text_extra_small ">{"v2.4.1"}</p>
-          </div>
-        ) : (
-          <></>
-        )}
       </div>
-    </div>
+      <Intercom />
+    </>
   );
 };
 
