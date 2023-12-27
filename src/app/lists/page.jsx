@@ -59,13 +59,13 @@ const Lists = () => {
       errors.title = "Title is required";
       setErrors((prevState) => ({ ...prevState, title: errors.title }));
     }
-    if (list.description.length <= 0) {
-      errors.description = "Description is required";
-      setErrors((prevState) => ({
-        ...prevState,
-        description: errors.description,
-      }));
-    }
+    // if (list.description.length <= 0) {
+    //   errors.description = "Description is required";
+    //   setErrors((prevState) => ({
+    //     ...prevState,
+    //     description: errors.description,
+    //   }));
+    // }
     return Object.keys(errors).length === 0;
   };
 

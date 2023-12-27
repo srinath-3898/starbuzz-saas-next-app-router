@@ -13,6 +13,7 @@ const MultiSelect = ({
   disabled,
   onChange,
   loading,
+  onDeselect,
 }) => {
   function filterOption(input, option) {
     return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
@@ -43,6 +44,7 @@ const MultiSelect = ({
           };
         })}
         onSearch={onSearch}
+        onDeselect={onDeselect}
         onBlur={onBlur}
         disabled={disabled}
       />

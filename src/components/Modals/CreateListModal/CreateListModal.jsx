@@ -84,7 +84,7 @@ const CreateListModal = ({
             value={list.description}
             name="description"
             id=""
-            placeholder="Description"
+            placeholder="Description (optional)"
           />
           {errors?.description && (
             <div className={`validation_error`}>
