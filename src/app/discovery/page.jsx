@@ -375,10 +375,11 @@ const Discovery = () => {
             account_geo:
               instaBodyData?.account_geo?.city?.length > 0
                 ? {
-                    country: ["in"],
                     city: instaBodyData?.account_geo?.city,
                   }
-                : null,
+                : {
+                    country: ["in"],
+                  },
             account_languages: ["en"],
             account_type: "human",
             aqs:
