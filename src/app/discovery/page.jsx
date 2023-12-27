@@ -30,7 +30,7 @@ import {
 
 const ListsIcon = dynamic(() => import("@/components/ListsIcon/ListsIcon"));
 const CampaignsIcon = dynamic(() =>
-  import("@/components/CustomDropdown/CustomDropdown")
+  import("../../components/CampaignsIcon/CampaignsIcon")
 );
 const CustomDropdown = dynamic(() =>
   import("@/components/CustomDropdown/CustomDropdown")
@@ -104,7 +104,7 @@ const Discovery = () => {
     audience_age: { groups: [], prc: 50 },
     audience_gender: { gender: [], prc: 20 },
     audience_geo: { cities: [] },
-    category: { include: [] },
+    category: { include: null },
     er: { from: 0, to: 0 },
     interests: [],
     social_network: "instagram",
@@ -113,7 +113,7 @@ const Discovery = () => {
   });
   const [youtubeBodyData, setYoutubeBodyData] = useState({
     social_network: "youtube",
-    thematics: { include: [] },
+    thematics: { include: null },
     account_geo: { country: "in" },
     account_age: { from: 0, to: 0 },
     account_languages: ["en"],
@@ -123,7 +123,11 @@ const Discovery = () => {
     subscribers_count: null,
     sort: { field: null, order: "asc" },
   });
-  const [instaErrors, setInstaErrors] = useState({ niches: "" });
+  const [instaErrors, setInstaErrors] = useState({
+    niches: "",
+    cities: "",
+    location: "",
+  });
   const [youtubeErrors, setYoutubeErrors] = useState({});
   const [pushToSubscriptionModalOpen, setPushToSubscriptionModalOpen] =
     useState(false);
@@ -133,7 +137,6 @@ const Discovery = () => {
 
   const tableRef = useRef(null);
   const errorRef = useRef(null);
-
   const items = [
     {
       key: "1",
@@ -183,7 +186,7 @@ const Discovery = () => {
       ),
     },
     {
-      title: "Insta ID",
+      title: isInstagram ? "Insta ID" : "Youtube ID",
       key: "username",
       dataIndex: "username",
     },
@@ -239,26 +242,21 @@ const Discovery = () => {
           );
         } else {
           return (
-            <Tooltip
-              title="Youtube Influencer report coming soon"
-              autoAdjustOverflow
+            <Link
+              href={{
+                pathname: "/report/youtube",
+                query: {
+                  username: record?.username,
+                },
+              }}
+              target="_blank"
+              style={{
+                textDecoration: "underline",
+                color: "#fe5900",
+              }}
             >
-              <Link
-                href={{
-                  pathname: "/report/youtube",
-                  query: {
-                    username: record?.username,
-                  },
-                }}
-                target="_blank"
-                style={{
-                  textDecoration: "underline",
-                  color: "#fe5900",
-                }}
-              >
-                View report
-              </Link>
-            </Tooltip>
+              View report
+            </Link>
           );
         }
       },
@@ -283,10 +281,7 @@ const Discovery = () => {
   ];
 
   const validateInstaFilters = () => {
-    if (
-      instaBodyData.category.include.length > 0 ||
-      instaBodyData.interests.length > 0
-    ) {
+    if (instaBodyData.category.include || instaBodyData.interests.length > 0) {
       return true;
     } else {
       setInstaErrors((prevState) => ({
@@ -298,7 +293,7 @@ const Discovery = () => {
   };
 
   const validateYotubeFilters = () => {
-    if (youtubeBodyData.thematics.include.length > 0) {
+    if (youtubeBodyData.thematics.include) {
       return true;
     } else {
       setYoutubeErrors((prevState) => ({
@@ -359,7 +354,7 @@ const Discovery = () => {
         dispatch(
           getFreemiumInfluencers({
             brandId,
-            niches: instaBodyData.category.include,
+            niches: [instaBodyData.category.include],
             size: 20,
             page,
           })
@@ -415,10 +410,9 @@ const Discovery = () => {
                     })),
                   }
                 : null,
-            category:
-              instaBodyData?.category?.include?.length > 0
-                ? { include: instaBodyData.category.include }
-                : null,
+            category: instaBodyData?.category?.include
+              ? { include: [instaBodyData.category.include] }
+              : null,
             er:
               instaBodyData?.er.to > 0
                 ? {
@@ -455,6 +449,7 @@ const Discovery = () => {
             delete discoverInfluencersBody.bodyData[key];
           }
         }
+        console.log(discoverInfluencersBody);
         dispatch(
           discoverInfluencers({ brandId, body: discoverInfluencersBody })
         );
@@ -464,11 +459,12 @@ const Discovery = () => {
 
   const handleYoutubeSearch = (page) => {
     if (validateYotubeFilters()) {
+      dispatch(resetRecentSearchData());
       if (subscription && subscription?.plan?.name === "free") {
         dispatch(
           getFreemiumYoutubeInfluencers({
             brandId,
-            niches: youtubeBodyData.thematics.include,
+            niches: [youtubeBodyData.thematics.include],
             size: 20,
             page,
           })
@@ -478,13 +474,11 @@ const Discovery = () => {
           page,
           bodyData: {
             social_network: "youtube",
-            thematics:
-              youtubeBodyData?.thematics?.include?.length > 0
-                ? {
-                    include: youtubeBodyData.thematics.include,
-                  }
-                : null,
-            account_gender: youtubeBodyData?.account_gender,
+            thematics: youtubeBodyData?.thematics?.include
+              ? {
+                  include: [youtubeBodyData.thematics.include],
+                }
+              : null,
             account_geo: { country: ["in"] },
             account_age:
               youtubeBodyData?.account_age?.to > 0
@@ -556,7 +550,6 @@ const Discovery = () => {
     dispatch(resetDiscoverYoutubeInfluencerData());
     dispatch(resetRecentSearchData());
   }, []);
-
   useEffect(() => {
     if (
       (influencers ||
@@ -708,6 +701,7 @@ const Discovery = () => {
           getFreemiumYoutubeInfluencersLoading) &&
         !influencers &&
         !freemiumInfluencers &&
+        !youtubeInfluencers &&
         !freemiumYoutubeInfluencers &&
         !recentSearchInfluencers ? (
           <Loader />
@@ -812,7 +806,7 @@ const Discovery = () => {
                           ? youtubeInfluencers?.current_page - 1
                           : freemiumYoutubeInfluencers
                           ? freemiumYoutubeInfluencers?.current_page - 1
-                          : ""
+                          : recentSearchInfluencers?.current_page - 1
                       );
                     }
                   }}
@@ -890,7 +884,7 @@ const Discovery = () => {
                           ? youtubeInfluencers?.current_page + 1
                           : freemiumYoutubeInfluencers
                           ? freemiumYoutubeInfluencers?.current_page + 1
-                          : ""
+                          : recentSearchInfluencers?.current_page + 1
                       );
                     }
                   }}

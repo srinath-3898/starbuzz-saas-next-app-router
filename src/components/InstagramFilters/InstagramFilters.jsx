@@ -126,7 +126,7 @@ const InstagramFilters = ({
         try {
           setLocationSearchLoading(true);
           const response = await axios.get(
-            `https://secure.geonames.org/searchJSON?q=${locationSearchValue}&country=IN&username=aravindha_sb`
+            `http://api.geonames.org/searchJSON?q=${locationSearchValue}&country=IN&username=aravindha_sb`
           );
           setInfluencerCities(response?.data?.geonames);
           setAudienceCities(response?.data?.geonames);
@@ -167,7 +167,7 @@ const InstagramFilters = ({
                   />
                 </Tooltip>
               </div>
-              <MultiSelect
+              <SingleSelect
                 width={"100%"}
                 placeHolder={"Please select your niches"}
                 options={instagramNiches}
@@ -224,6 +224,19 @@ const InstagramFilters = ({
                 }
               >
                 <div>
+                  {errors.cities ? (
+                    <div
+                      className={`validation_error ${styles.location_error}`}
+                    >
+                      <p className="text_small">{errors.cities}</p>
+                      <CloseCircleFilled
+                        style={{ fontSize: "14px", color: "red" }}
+                        onClick={() => handleCloseError("cities")}
+                      />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                   <MultiSelect
                     width={"100%"}
                     type={"influencerCities"}
@@ -236,11 +249,36 @@ const InstagramFilters = ({
                     onSearch={(value) => setLocationSearcValue(value)}
                     onBlur={onBlur}
                     disabled={subscription?.plan?.name === "free"}
-                    onChange={(value) => {
+                    onDeselect={(value) => {
                       setBodyData((prevState) => ({
                         ...prevState,
-                        account_geo: { ...prevState.account_geo, city: value },
+                        account_geo: {
+                          ...prevState.account_geo,
+                          city: prevState.account_geo.city.filter(
+                            (item) => item !== value
+                          ),
+                        },
                       }));
+                      setErrors((prevState) => ({
+                        ...prevState,
+                        cities: "",
+                      }));
+                    }}
+                    onChange={(value) => {
+                      if (bodyData?.account_geo?.city?.length < 3) {
+                        setBodyData((prevState) => ({
+                          ...prevState,
+                          account_geo: {
+                            ...prevState.account_geo,
+                            city: value,
+                          },
+                        }));
+                      } else {
+                        setErrors((prevState) => ({
+                          ...prevState,
+                          cities: "You can select only 3 cities",
+                        }));
+                      }
                     }}
                   />
                 </div>
@@ -362,6 +400,19 @@ const InstagramFilters = ({
                 }
               >
                 <div>
+                  {errors.location ? (
+                    <div
+                      className={`validation_error ${styles.location_error}`}
+                    >
+                      <p className="text_small">{errors.location}</p>
+                      <CloseCircleFilled
+                        style={{ fontSize: "14px", color: "red" }}
+                        onClick={() => handleCloseError("location")}
+                      />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                   <MultiSelect
                     width={"100%"}
                     type={"audienceCities"}
@@ -373,12 +424,48 @@ const InstagramFilters = ({
                     onSearch={(value) => setLocationSearcValue(value)}
                     loading={locationSearchLoading}
                     onBlur={onBlur}
-                    disabled={subscription?.plan?.name === "free"}
-                    onChange={(value) => {
+                    onDeselect={(value) => {
                       setBodyData((prevState) => ({
                         ...prevState,
-                        audience_geo: { cities: value },
+                        audience_geo: {
+                          ...prevState.audience_geo,
+                          cities: prevState.audience_geo.cities.filter(
+                            (item) => item !== value
+                          ),
+                        },
                       }));
+                      setErrors((prevState) => ({
+                        ...prevState,
+                        location: "",
+                      }));
+                    }}
+                    disabled={subscription?.plan?.name === "free"}
+                    // onChange={(value) => {
+                    //   setBodyData((prevState) => ({
+                    //     ...prevState,
+                    //     audience_geo: {
+                    //       ...prevState.audience_geo,
+                    //       cities: value,
+                    //     },
+                    //   }));
+                    // }}
+
+                    onChange={(value) => {
+                      console.log(value);
+                      if (bodyData?.audience_geo?.cities.length < 3) {
+                        setBodyData((prevState) => ({
+                          ...prevState,
+                          audience_geo: {
+                            ...prevState.audience_geo,
+                            cities: value,
+                          },
+                        }));
+                      } else {
+                        setErrors((prevState) => ({
+                          ...prevState,
+                          location: "You can select only 3 cities",
+                        }));
+                      }
                     }}
                   />
                 </div>
@@ -455,7 +542,7 @@ const InstagramFilters = ({
                 }
               >
                 <div>
-                  <MultiSelect
+                  <SingleSelect
                     width={"100%"}
                     type={"intrests"}
                     placeHolder={"By Audience Interests"}
@@ -470,7 +557,7 @@ const InstagramFilters = ({
                     onChange={(value) => {
                       setBodyData((prevState) => ({
                         ...prevState,
-                        interests: value,
+                        interests: [value],
                       }));
                     }}
                   />

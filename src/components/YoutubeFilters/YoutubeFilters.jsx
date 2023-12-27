@@ -120,7 +120,6 @@ const YoutubeFilters = ({
                 </Tooltip>
               </div>
               <Select
-                mode="multiple"
                 allowClear
                 placeholder="Please select your niches"
                 options={youtubeNiches?.map((item) => ({
@@ -335,10 +334,11 @@ const YoutubeFilters = ({
             <div className={styles.filter}>
               <div className={styles.heading}>
                 <p className={`text_small`}>
-                  Post Price ({bodyData?.blogger_prices?.post_price?.from} -{" "}
+                  Estimated Post Price ( $
+                  {bodyData?.blogger_prices?.post_price?.from} - $
                   {bodyData?.blogger_prices?.post_price?.to})
                 </p>
-                <Tooltip title={"Age of the influencer"}>
+                <Tooltip title={"Estimated post price of youtube influencer"}>
                   <InfoCircleOutlined
                     style={{ fontSize: 16, cursor: "pointer" }}
                   />
@@ -361,6 +361,8 @@ const YoutubeFilters = ({
               >
                 <div>
                   <TwoWaySlider
+                    min={0}
+                    max={1000000}
                     disabled={subscription?.plan?.name === "free"}
                     value={[
                       bodyData?.blogger_prices?.post_price?.from,
@@ -384,7 +386,7 @@ const YoutubeFilters = ({
             <div className={styles.filter}>
               <div className={styles.heading}>
                 <p className={`text_small`}>Sort by</p>
-                <Tooltip title={``}>
+                <Tooltip title={`sort field`}>
                   <InfoCircleOutlined
                     style={{ fontSize: 16, cursor: "pointer" }}
                   />

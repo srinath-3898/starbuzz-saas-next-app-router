@@ -9,6 +9,10 @@
   height: 300px;
 }
 
+.location_error {
+  margin-bottom: 8px;
+}
+
 .filters {
   background-color: #f6f8f9;
   padding: 15px;
