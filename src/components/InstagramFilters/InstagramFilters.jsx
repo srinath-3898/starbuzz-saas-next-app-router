@@ -132,6 +132,7 @@ const InstagramFilters = ({
           setAudienceCities(response?.data?.geonames);
           setLocationSearchLoading(false);
         } catch (error) {
+          console.log(error);
           setLocationSearchLoading(false);
         }
       }, 500);
