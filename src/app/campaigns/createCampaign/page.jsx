@@ -25,8 +25,6 @@ const CreateCampaign = () => {
 
   const id = useSearchParams().get("id");
 
-  console.log(id);
-
   const { instagramNiches, platforms } = useSelector((state) => state.taxanomy);
   const { loading, campaign, error, cudCampaignLoading, cudCampaignError } =
     useSelector((state) => state.campaign);

@@ -69,7 +69,6 @@ const AudienceByAge = ({ influencer }) => {
       ]);
     }
   }, [categories, maleData, femaleData]);
-  console.log(influencer?.audience_age_gender);
 
   return Object.entries(influencer?.audience_age_gender || {}).length > 0 ? (
     <>

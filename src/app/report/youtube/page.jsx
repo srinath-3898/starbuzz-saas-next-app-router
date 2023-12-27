@@ -142,8 +142,6 @@ const YoutubeReport = () => {
     }
   }, [youtubeReport]);
 
-  console.log(youtubeInfluencer);
-  console.log(youtubeReport);
   return subscription ? (
     <>
       {youtubeReportLoading && !youtubeReport && !youtubeReportError ? (

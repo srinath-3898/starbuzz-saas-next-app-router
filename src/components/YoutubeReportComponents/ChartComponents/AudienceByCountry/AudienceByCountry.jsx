@@ -51,8 +51,6 @@ const AudienceByCountry = ({ influencer }) => {
     }
   }, [categories, data]);
 
-  console.log(series);
-
   return influencer?.audience_geo?.length > 0 ? (
     <div className={styles.container}>
       <div className={styles.container_1}>

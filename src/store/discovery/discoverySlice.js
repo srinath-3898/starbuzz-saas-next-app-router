@@ -201,6 +201,7 @@ const discoverySlice = createSlice({
       })
       .addCase(getRecentSearch.rejected, (state, { payload }) => {
         state.recentSearchLoading = false;
+        state.recentSearchInfluencers = null;
         state.errorCode = payload?.response?.status;
         if (payload?.response?.data?.message) {
           state.recentSearchError = payload?.response?.data?.message;
