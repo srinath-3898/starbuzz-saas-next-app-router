@@ -142,22 +142,26 @@ const Apptour = () => {
     },
     {
       title: "Dashboard ",
-      description: "Dashboard",
+      description:
+        "Dashboard showcases two YouTube videos: one guides Discovery feature use, while the other previews report content and how it looks like.",
       target: () => ref4.current,
     },
     {
       title: "Discovery",
-      description: "Discovery",
+      description:
+        "Discover influencers effortlessly with our platform's advanced filters—narrow down your search based on Niche, Influencer City, gender, age, Audience Location, Audience Age, Audience Interests, Audience Gender, Followers Range, ER (Engagement Rate), and SB (StarBuzz) Score for precise and tailored results.",
       target: () => ref5.current,
     },
     {
       title: "Lists",
-      description: "Lists",
+      description:
+        "Effortlessly manage your influencer network! Create, add, and delete influencers from custom lists with our user-friendly platform, streamlining your influencer marketing strategy.",
       target: () => ref6.current,
     },
     {
       title: "Campaigns",
-      description: "Campaigns",
+      description:
+        "Elevate your marketing game! Easily create and manage campaigns with our intuitive platform, streamlining the process and maximizing the impact of your strategic marketing initiatives.",
       target: () => ref7.current,
     },
   ];
@@ -177,27 +181,31 @@ const Apptour = () => {
     },
     {
       title: "Dashboard ",
-      description: "Dashboard",
+      description:
+        "Dashboard showcases two YouTube videos: one guides Discovery feature use, while the other previews report content and how it looks like.",
       target: () => ref4.current,
     },
     {
       title: "Discovery",
-      description: "Discovery",
+      description:
+        "Discover influencers effortlessly with our platform's advanced filters—narrow down your search based on Niche, Influencer City, gender, age, Audience Location, Audience Age, Audience Interests, Audience Gender, Followers Range, ER (Engagement Rate), and SB (StarBuzz) Score for precise and tailored results.",
       target: () => ref5.current,
     },
     {
       title: "Lists",
-      description: "Lists",
+      description:
+        "Effortlessly manage your influencer network! Create, add, and delete influencers from custom lists with our user-friendly platform, streamlining your influencer marketing strategy.",
       target: () => ref6.current,
     },
     {
       title: "Campaigns",
-      description: "Campaigns",
+      description:
+        "Elevate your marketing game! Easily create and manage campaigns with our intuitive platform, streamlining the process and maximizing the impact of your strategic marketing initiatives.",
       target: () => ref7.current,
     },
     {
       title: "Roles",
-      description: "ROles",
+      description: "Roles",
       target: () => ref8.current,
     },
     {
@@ -227,22 +235,26 @@ const Apptour = () => {
     },
     {
       title: "Dashboard ",
-      description: "Dashboard",
+      description:
+        "Dashboard showcases two YouTube videos: one guides Discovery feature use, while the other previews report content and how it looks like.",
       target: () => ref4.current,
     },
     {
       title: "Discovery",
-      description: "Discovery",
+      description:
+        "Discover influencers effortlessly with our platform's advanced filters—narrow down your search based on Niche, Influencer City, gender, age, Audience Location, Audience Age, Audience Interests, Audience Gender, Followers Range, ER (Engagement Rate), and SB (StarBuzz) Score for precise and tailored results.",
       target: () => ref5.current,
     },
     {
       title: "Lists",
-      description: "Lists",
+      description:
+        "Effortlessly manage your influencer network! Create, add, and delete influencers from custom lists with our user-friendly platform, streamlining your influencer marketing strategy.",
       target: () => ref6.current,
     },
     {
       title: "Campaigns",
-      description: "Campaigns",
+      description:
+        "Elevate your marketing game! Easily create and manage campaigns with our intuitive platform, streamlining the process and maximizing the impact of your strategic marketing initiatives.",
       target: () => ref7.current,
     },
   ];
