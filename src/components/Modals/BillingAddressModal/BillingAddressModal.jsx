@@ -17,6 +17,7 @@ import {
 } from "@/store/payment/paymentSlice";
 import Loader from "@/components/Loader/Loader";
 import Error from "@/components/Error/Error";
+import { searchCitiesByName } from "@/store/search/searchActions";
 
 const BillingAddressModal = ({
   open,
@@ -48,6 +49,12 @@ const BillingAddressModal = ({
     states,
     getStatesError,
   } = useSelector((state) => state.payment);
+  const {
+    loading: citiesLoading,
+    cities,
+    error: searchError,
+    errorCode: searchErrorCode,
+  } = useSelector((state) => state.search);
 
   const [billingAddressFormData, setBillingAddressFormData] = useState({
     phone: "",
@@ -73,6 +80,7 @@ const BillingAddressModal = ({
     vat_number: "",
   });
   const [iframeLoading, setIframeLoading] = useState(false);
+  const [citiesSearchValue, setCitiesSearchValue] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -208,6 +216,17 @@ const BillingAddressModal = ({
   useEffect(() => {
     dispatch(getStates());
   }, [open]);
+
+  useEffect(() => {
+    if (citiesSearchValue) {
+      const identifier = setTimeout(async () => {
+        dispatch(searchCitiesByName({ data: citiesSearchValue }));
+      }, 500);
+      return () => {
+        clearTimeout(identifier);
+      };
+    }
+  }, [citiesSearchValue]);
 
   return (
     <Modal
@@ -441,14 +460,27 @@ const BillingAddressModal = ({
               <div>
                 <div className="input_controller">
                   <label htmlFor="city">City:</label>
-                  <input
-                    id="city"
-                    type="text"
-                    placeholder="City"
-                    name="city"
+                  <Select
+                    showSearch
+                    allowClear
+                    placeholder="Please select city"
+                    options={cities?.map((city) => ({
+                      label: city?.name,
+                      value: city?.name,
+                    }))}
+                    onSearch={(value) => setCitiesSearchValue(value)}
+                    loading={citiesLoading}
                     value={billingAddressFormData?.city}
-                    onChange={handleChange}
-                    required
+                    onChange={(value) => {
+                      setBillingAddressFormData((prevState) => ({
+                        ...prevState,
+                        city: value,
+                      }));
+                      setErrors((prevState) => ({
+                        ...prevState,
+                        city: "",
+                      }));
+                    }}
                   />
                 </div>
                 {errors?.city && (

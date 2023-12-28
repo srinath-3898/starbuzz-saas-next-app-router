@@ -13,6 +13,8 @@ import SingleSelect from "../SingleSelect/SingleSelect";
 import TwoWaySlider from "../TwoWaySlider/TwoWaySlider";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
+import { searchCitiesByName } from "@/store/search/searchActions";
+import { resetCitiesData } from "@/store/search/searchSlice";
 
 const InstagramFilters = ({
   bodyData,
@@ -80,17 +82,20 @@ const InstagramFilters = ({
     getFreemiumInfluencersLoading,
   } = useSelector((state) => state.discovery);
 
+  const {
+    loading: citiesLoading,
+    cities,
+    error: searchError,
+    errorCode: searchErrorCode,
+  } = useSelector((state) => state.search);
+
   const [nichesDisabled, setNichesDisabled] = useState(false);
-  const [influencerCities, setInfluencerCities] = useState(null);
-  const [audienceCities, setAudienceCities] = useState(null);
   const [audienceInterestsDisabled, setAudienceInterestsDisabled] =
     useState(false);
-  const [locationSearchLoading, setLocationSearchLoading] = useState(false);
   const [locationSearchValue, setLocationSearcValue] = useState(null);
 
   const onBlur = () => {
-    setInfluencerCities([]);
-    setAudienceCities([]);
+    resetCitiesData();
   };
 
   const handleCloseError = (name) => {
@@ -123,24 +128,14 @@ const InstagramFilters = ({
   useEffect(() => {
     if (locationSearchValue) {
       const identifier = setTimeout(async () => {
-        try {
-          setLocationSearchLoading(true);
-          const response = await axios.get(
-            `http://api.geonames.org/searchJSON?q=${locationSearchValue}&country=IN&username=aravindha_sb`
-          );
-          setInfluencerCities(response?.data?.geonames);
-          setAudienceCities(response?.data?.geonames);
-          setLocationSearchLoading(false);
-        } catch (error) {
-          setLocationSearchLoading(false);
-        }
+        dispatch(searchCitiesByName({ data: locationSearchValue }));
       }, 500);
       return () => {
         clearTimeout(identifier);
       };
     }
   }, [locationSearchValue]);
-
+  console.log(citiesLoading);
   return subscription ? (
     <div className={styles.container}>
       <p className="text_small bold text_secondary">Search Filters</p>
@@ -170,7 +165,9 @@ const InstagramFilters = ({
               <SingleSelect
                 width={"100%"}
                 placeHolder={"Please select your niches"}
-                options={instagramNiches}
+                options={instagramNiches?.filter(
+                  (item) => item?.type === "CATEGORY"
+                )}
                 optionValue={"niche_id"}
                 optionLabel={"title"}
                 selectedOptions={bodyData?.category?.include}
@@ -241,11 +238,11 @@ const InstagramFilters = ({
                     width={"100%"}
                     type={"influencerCities"}
                     placeHolder={"Please enter city name"}
-                    options={influencerCities}
-                    optionValue={"geonameId"}
+                    options={cities}
+                    optionValue={"geo_code"}
                     optionLabel={"name"}
                     selectedOptions={bodyData?.account_geo?.city}
-                    loading={locationSearchLoading}
+                    loading={citiesLoading}
                     onSearch={(value) => setLocationSearcValue(value)}
                     onBlur={onBlur}
                     disabled={subscription?.plan?.name === "free"}
@@ -417,12 +414,12 @@ const InstagramFilters = ({
                     width={"100%"}
                     type={"audienceCities"}
                     placeHolder={"Please enter city name"}
-                    options={audienceCities}
-                    optionValue={"geonameId"}
+                    options={cities}
+                    optionValue={"geo_code"}
                     optionLabel={"name"}
                     selectedOptions={bodyData?.audience_geo?.cities}
                     onSearch={(value) => setLocationSearcValue(value)}
-                    loading={locationSearchLoading}
+                    loading={citiesLoading}
                     onBlur={onBlur}
                     onDeselect={(value) => {
                       setBodyData((prevState) => ({
@@ -535,7 +532,9 @@ const InstagramFilters = ({
                     width={"100%"}
                     type={"intrests"}
                     placeHolder={"By Audience Interests"}
-                    options={instagramNiches}
+                    options={instagramNiches?.filter(
+                      (item) => item?.type === "INTEREST"
+                    )}
                     optionValue={"niche_id"}
                     optionLabel={"title"}
                     selectedOptions={bodyData?.interests}
