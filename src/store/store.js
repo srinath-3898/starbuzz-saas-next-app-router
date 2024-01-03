@@ -38,7 +38,7 @@ import reportsReducer from "./reports/reportsSlice";
 import paymentsReducer from "./payments/paymentsSlice";
 import transactionsReducer from "./transactions/transactionsSlice";
 import addOnsReducer from "./addOns/addOnsSlice";
-
+import searchCitiesReducer from "./search/searchSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -70,5 +70,6 @@ export const store = configureStore({
     payments: paymentsReducer,
     transactions: transactionsReducer,
     addOns: addOnsReducer,
+    search: searchCitiesReducer,
   },
 });

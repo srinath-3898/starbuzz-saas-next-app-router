@@ -600,6 +600,12 @@ const Discovery = () => {
                 : [],
             prc: 50,
           },
+          account_geo: {
+            city:
+              recentSearchBody?.account_geo?.city?.length > 0
+                ? recentSearchBody?.account_geo?.city
+                : [],
+          },
           audience_geo: {
             cities:
               recentSearchBody?.audience_geo?.cities?.length > 0
