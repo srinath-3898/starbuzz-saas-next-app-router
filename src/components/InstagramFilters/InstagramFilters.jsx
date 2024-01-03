@@ -13,7 +13,10 @@ import SingleSelect from "../SingleSelect/SingleSelect";
 import TwoWaySlider from "../TwoWaySlider/TwoWaySlider";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
-import { searchCitiesByName } from "@/store/search/searchActions";
+import {
+  getCitiesById,
+  searchCitiesByName,
+} from "@/store/search/searchActions";
 import { resetCitiesData } from "@/store/search/searchSlice";
 
 const InstagramFilters = ({
@@ -78,7 +81,7 @@ const InstagramFilters = ({
   const {
     loading: discoverInfluencersLoading,
     recentSearchLoading,
-
+    recentSearchBody,
     getFreemiumInfluencersLoading,
   } = useSelector((state) => state.discovery);
 
@@ -112,7 +115,7 @@ const InstagramFilters = ({
   }, [subscription]);
 
   useEffect(() => {
-    if (bodyData?.category?.include?.length > 0) {
+    if (bodyData?.category?.include) {
       setAudienceInterestsDisabled(true);
       setErrors((prevState) => ({ ...prevState, niches: "" }));
     } else if (bodyData.category.include?.length === 0) {
@@ -126,6 +129,23 @@ const InstagramFilters = ({
   }, [bodyData]);
 
   useEffect(() => {
+    if (recentSearchBody?.audience_geo?.cities?.length > 0) {
+      dispatch(
+        getCitiesById({
+          ids: recentSearchBody?.audience_geo?.cities?.map((item) => item.id),
+        })
+      );
+    }
+    if (recentSearchBody?.account_geo?.city?.length > 0) {
+      dispatch(
+        getCitiesById({
+          ids: recentSearchBody?.account_geo?.city,
+        })
+      );
+    }
+  }, [recentSearchBody]);
+
+  useEffect(() => {
     if (locationSearchValue) {
       const identifier = setTimeout(async () => {
         dispatch(searchCitiesByName({ data: locationSearchValue }));
@@ -135,7 +155,6 @@ const InstagramFilters = ({
       };
     }
   }, [locationSearchValue]);
-  console.log(citiesLoading);
   return subscription ? (
     <div className={styles.container}>
       <p className="text_small bold text_secondary">Search Filters</p>
@@ -170,7 +189,7 @@ const InstagramFilters = ({
                 )}
                 optionValue={"niche_id"}
                 optionLabel={"title"}
-                selectedOptions={bodyData?.category?.include}
+                selectedOption={bodyData?.category?.include}
                 disabled={nichesDisabled}
                 onChange={(value) => {
                   if (instagramNichesError) {
@@ -234,6 +253,50 @@ const InstagramFilters = ({
                   ) : (
                     <></>
                   )}
+                  {/* <MultiSelect
+                    width={"100%"}
+                    type={"audienceCities"}
+                    placeHolder={"Please enter city name"}
+                    options={cities}
+                    optionValue={"geo_code"}
+                    optionLabel={"name"}
+                    selectedOptions={bodyData?.audience_geo?.cities}
+                    onSearch={(value) => setLocationSearcValue(value)}
+                    loading={citiesLoading}
+                    onBlur={onBlur}
+                    onDeselect={(value) => {
+                      setBodyData((prevState) => ({
+                        ...prevState,
+                        audience_geo: {
+                          ...prevState.audience_geo,
+                          cities: prevState.audience_geo.cities.filter(
+                            (item) => item !== value
+                          ),
+                        },
+                      }));
+                      setErrors((prevState) => ({
+                        ...prevState,
+                        location: "",
+                      }));
+                    }}
+                    disabled={subscription?.plan?.name === "free"}
+                    onChange={(value) => {
+                      if (bodyData?.audience_geo?.cities.length < 3) {
+                        setBodyData((prevState) => ({
+                          ...prevState,
+                          audience_geo: {
+                            ...prevState.audience_geo,
+                            cities: value,
+                          },
+                        }));
+                      } else {
+                        setErrors((prevState) => ({
+                          ...prevState,
+                          location: "You can select only 3 cities",
+                        }));
+                      }
+                    }}
+                  /> */}
                   <MultiSelect
                     width={"100%"}
                     type={"influencerCities"}
@@ -251,7 +314,7 @@ const InstagramFilters = ({
                         ...prevState,
                         account_geo: {
                           ...prevState.account_geo,
-                          city: prevState.account_geo.city.filter(
+                          city: prevState.account_geo?.city?.filter(
                             (item) => item !== value
                           ),
                         },
@@ -537,7 +600,7 @@ const InstagramFilters = ({
                     )}
                     optionValue={"niche_id"}
                     optionLabel={"title"}
-                    selectedOptions={bodyData?.interests}
+                    selectedOption={bodyData?.interests}
                     disabled={
                       audienceInterestsDisabled ||
                       subscription?.plan?.name === "free"
@@ -545,7 +608,7 @@ const InstagramFilters = ({
                     onChange={(value) => {
                       setBodyData((prevState) => ({
                         ...prevState,
-                        interests: [value],
+                        interests: value,
                       }));
                     }}
                   />

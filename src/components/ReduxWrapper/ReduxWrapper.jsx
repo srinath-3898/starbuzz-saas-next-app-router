@@ -43,8 +43,6 @@ const ReduxWrapper = ({ children }) => {
     ) {
       dispatch(setToken(localStorage.getItem("token")));
       dispatch(getUserDetails());
-    } else {
-      router.push("/login");
     }
   }, []);
 
@@ -148,7 +146,7 @@ const ReduxWrapper = ({ children }) => {
               <p className="text_extra_small bold">
                 Copyright © Krisattva Pvt Ltd. All Right Reserved.
               </p>
-              <p className="text_extra_small ">{"v2.4.1"}</p>
+              <p className="text_extra_small ">{"v2.5.1"}</p>
             </div>
           ) : (
             <></>

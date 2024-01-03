@@ -3,8 +3,10 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  height: 100vh;
+  min-height: 100vh;
   justify-content: center;
+  max-width: 25%;
+  margin: auto;
 }
 
 .agency_or_brand {
@@ -43,6 +45,11 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
+}
+
+.signup_form input {
+  width: 100%;
 }
 
 .password,
@@ -54,8 +61,7 @@
 .show_password_icon {
   position: absolute;
   top: 30px;
-  left: 30px;
-  left: 330px;
+  left: 355px;
 }
 
 .terms_and_conditions a,

@@ -375,10 +375,11 @@ const Discovery = () => {
             account_geo:
               instaBodyData?.account_geo?.city?.length > 0
                 ? {
-                    country: ["in"],
                     city: instaBodyData?.account_geo?.city,
                   }
-                : null,
+                : {
+                    country: ["in"],
+                  },
             account_languages: ["en"],
             account_type: "human",
             aqs:
@@ -598,6 +599,12 @@ const Discovery = () => {
                 ? recentSearchBody?.audience_age?.groups
                 : [],
             prc: 50,
+          },
+          account_geo: {
+            city:
+              recentSearchBody?.account_geo?.city?.length > 0
+                ? recentSearchBody?.account_geo?.city
+                : [],
           },
           audience_geo: {
             cities:

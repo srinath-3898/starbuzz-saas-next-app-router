@@ -16,3 +16,18 @@ export const searchCitiesByName = createAsyncThunk(
     }
   }
 );
+
+export const getCitiesById = createAsyncThunk(
+  "search/getCitiesById",
+  async ({ ids }, { rejectWithValue }) => {
+    try {
+      api.defaults.headers.common["Authorization"] = `${localStorage.getItem(
+        "token"
+      )}`;
+      const response = await api.post(`user/search/cities`, { geoIds: ids });
+      return response;
+    } catch (error) {
+      rejectWithValue(error);
+    }
+  }
+);
