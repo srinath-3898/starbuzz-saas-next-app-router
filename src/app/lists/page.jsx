@@ -254,7 +254,7 @@ const Lists = () => {
                 />
               </ConfigProvider>
             </div>
-            {lists?.total_records > size ? (
+            {lists?.total_records > 4 ? (
               <Pagination
                 page={page}
                 setPage={setPage}
