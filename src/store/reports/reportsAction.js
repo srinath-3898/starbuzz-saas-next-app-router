@@ -33,10 +33,10 @@ export const fetchReportsByUser = createAsyncThunk(
   }
 );
 
-//generate report pdf
+//generate insta report pdf
 
-export const generateReportPDF = createAsyncThunk(
-  "reports/generateReportPDF",
+export const generateInstaReportPDF = createAsyncThunk(
+  "reports/generateInstaReportPDF",
   async ({ brandId, username }, { rejectWithValue }) => {
     try {
       api.defaults.headers.common["Authorization"] = ` ${localStorage.getItem(
@@ -44,6 +44,25 @@ export const generateReportPDF = createAsyncThunk(
       )}`;
       const response = await api.post(
         `/user/brand/${brandId}/ig/report/pdf/${username}`
+      );
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+//generate youtube report pdf
+
+export const generateYoutubeReportPDF = createAsyncThunk(
+  "reports/generateYoutubeReportPDF",
+  async ({ brandId, username }, { rejectWithValue }) => {
+    try {
+      api.defaults.headers.common["Authorization"] = `${localStorage.getItem(
+        "token"
+      )}`;
+      const response = await api.post(
+        `/user/brand/${brandId}/yt/report/pdf/${username}`
       );
       return response;
     } catch (error) {

@@ -570,9 +570,14 @@ const Campaign = () => {
                         <p className="text_medium">
                           Please Contact to your Campaign Manager
                         </p>{" "}
-                        <button className="btn_small btn_primary">
-                          Call now
-                        </button>
+                        <Link
+                          href={{ pathname: "https://wa.me/+919000134357" }}
+                          target="_blank"
+                        >
+                          <button className={`btn_small btn_primary`}>
+                            Call Now
+                          </button>
+                        </Link>
                       </div>
                     </>
                   ) : (

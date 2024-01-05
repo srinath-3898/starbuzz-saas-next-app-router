@@ -88,7 +88,7 @@ const Campaigns = () => {
           ) : (
             <></>
           )}
-          {campaigns && campaigns?.total_records > size && !error ? (
+          {campaigns && campaigns?.total_records > 4 && !error ? (
             <Pagination
               page={page}
               setPage={setPage}

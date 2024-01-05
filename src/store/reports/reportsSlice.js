@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchReportsByBrand,
   fetchReportsByUser,
-  generateReportPDF,
+  generateInstaReportPDF,
+  generateYoutubeReportPDF,
 } from "./reportsAction";
 
 const initialState = {
@@ -12,25 +13,37 @@ const initialState = {
   reportsByUserLoading: false,
   reportsByUser: null,
   reportsByUserError: null,
-  generateReportPDFLoading: false,
+  generateInstaReportPDFLoading: false,
   pdfSource: null,
-  generateReportPDFMessage: null,
-  generateReportPDFError: null,
+  generateInstaReportPDFMessage: null,
+  generateInstaReportPDFError: null,
   fetchReportsByBrandErrorCode: null,
   fetchReportsByUserErrorCode: null,
-  generateReportPDFErrorCode: null,
+  generateInstaReportPDFErrorCode: null,
+  generateYoutubeReportPDFLoading: false,
+  youtubePDFSource: null,
+  generateYoutubeReportPDFMessage: null,
+  generateYoutubeReportPDFError: null,
+  generateYoutubeReportPDFErrorCode: null,
 };
 
 const reportsSlice = createSlice({
   name: "reports",
   initialState,
   reducers: {
-    resetGenerateReportPDFData: (state) => {
-      state.generateReportPDFLoading = false;
+    resetGenerateInstaReportPDFData: (state) => {
+      state.generateInstaReportPDFLoading = false;
       state.pdfSource = null;
-      state.generateReportPDFMessage = null;
-      state.generateReportPDFError = null;
+      state.generateInstaReportPDFMessage = null;
+      state.generateInstaReportPDFError = null;
       state.fetchReportsByBrandErrorCode = null;
+    },
+    resetGenerateYoutubeReportPDFData: (state) => {
+      state.generateYoutubeReportPDFLoading = false;
+      state.youtubePDFSource = null;
+      state.generateYoutubeReportPDFMessage = null;
+      state.generateYoutubeReportPDFError = null;
+      state.generateYoutubeReportPDFErrorCode = null;
     },
   },
   extraReducers: (builder) => {
@@ -76,34 +89,64 @@ const reportsSlice = createSlice({
         }
       })
 
-      .addCase(generateReportPDF.pending, (state) => {
-        state.generateReportPDFLoading = true;
+      .addCase(generateInstaReportPDF.pending, (state) => {
+        state.generateInstaReportPDFLoading = true;
         state.pdfSource = null;
-        state.generateReportPDFError = null;
-        state.generateReportPDFMessage = null;
-        state.generateReportPDFErrorCode = null;
+        state.generateInstaReportPDFError = null;
+        state.generateInstaReportPDFMessage = null;
+        state.generateInstaReportPDFErrorCode = null;
       })
-      .addCase(generateReportPDF.fulfilled, (state, { payload }) => {
-        state.generateReportPDFLoading = false;
+      .addCase(generateInstaReportPDF.fulfilled, (state, { payload }) => {
+        state.generateInstaReportPDFLoading = false;
         state.pdfSource = payload?.data?.data?.pdf_source;
-        state.generateReportPDFMessage = payload?.data?.message;
-        state.generateReportPDFError = null;
-        state.generateReportPDFErrorCode = null;
+        state.generateInstaReportPDFMessage = payload?.data?.message;
+        state.generateInstaReportPDFError = null;
+        state.generateInstaReportPDFErrorCode = null;
       })
-      .addCase(generateReportPDF.rejected, (state, { payload }) => {
-        state.generateReportPDFLoading = false;
+      .addCase(generateInstaReportPDF.rejected, (state, { payload }) => {
+        state.generateInstaReportPDFLoading = false;
         state.pdfSource = null;
-        state.generateReportPDFMessage = null;
-        state.generateReportPDFErrorCode = payload?.response?.status;
+        state.generateInstaReportPDFMessage = null;
+        state.generateInstaReportPDFErrorCode = payload?.response?.status;
         if (payload?.response?.data?.message) {
-          state.generateReportPDFError = payload?.response?.data?.message;
+          state.generateInstaReportPDFError = payload?.response?.data?.message;
         } else {
-          state.generateReportPDFError = payload?.message;
+          state.generateInstaReportPDFError = payload?.message;
+        }
+      });
+
+    builder
+      .addCase(generateYoutubeReportPDF.pending, (state) => {
+        state.generateYoutubeReportPDFLoading = true;
+        state.youtubePDFSource = null;
+        state.generateYoutubeReportPDFMessage = null;
+        state.generateYoutubeReportPDFError = null;
+        state.generateYoutubeReportPDFErrorCode = null;
+      })
+      .addCase(generateYoutubeReportPDF.fulfilled, (state, { payload }) => {
+        state.generateYoutubeReportPDFLoading = false;
+        state.youtubePDFSource = payload?.data?.data?.pdf_source;
+        state.generateYoutubeReportPDFMessage = payload?.data?.message;
+        state.generateYoutubeReportPDFError = null;
+        state.generateYoutubeReportPDFErrorCode = null;
+      })
+      .addCase(generateYoutubeReportPDF.rejected, (state, { payload }) => {
+        state.generateYoutubeReportPDFLoading = false;
+        state.youtubePDFSource = null;
+        state.generateYoutubeReportPDFMessage = null;
+        state.generateYoutubeReportPDFErrorCode = payload?.response?.status;
+        if (payload?.response?.data?.message) {
+          state.generateYoutubeReportPDFError =
+            payload?.response?.data?.message;
+        } else {
+          state.generateYoutubeReportPDFError = payload?.message;
         }
       });
   },
 });
 
-export const { resetGenerateReportData, resetGenerateReportPDFData } =
-  reportsSlice.actions;
+export const {
+  resetGenerateInstaReportPDFData,
+  resetGenerateYoutubeReportPDFData,
+} = reportsSlice.actions;
 export default reportsSlice.reducer;
