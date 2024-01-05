@@ -218,7 +218,7 @@ const Users = () => {
                 loading={{ indicator: <Loader />, spinning: loading }}
               />
             </ConfigProvider>
-            {users?.total_records > size && (
+            {users?.total_records > 4 && (
               <Pagination
                 page={page}
                 setPage={setPage}

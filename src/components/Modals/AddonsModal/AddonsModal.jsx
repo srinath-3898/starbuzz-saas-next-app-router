@@ -108,8 +108,8 @@ const AddonsModal = ({ open, setOpen }) => {
         <button
           className="btn_small btn_primary"
           onClick={() => {
-            setId(record?.feature?.id);
             handlePayment({ record });
+            setId(record?.feature?.id);
           }}
           disabled={
             (record?.feature?.id === id && generateAddonCheckoutUrlLoading) ||
@@ -131,14 +131,12 @@ const AddonsModal = ({ open, setOpen }) => {
     return record?.feature?.id === 8 ? styles.campaign : "";
   };
   const handlePayment = ({ record }) => {
-    if (record?.feature?.id === id) {
-      const data = {
-        featureId: record?.feature?.id,
-        quantity:
-          record?.feature?.name === "Discovery" ? discoveryCount : reportCount,
-      };
-      dispatch(generateAddonCheckoutUrl(data));
-    }
+    const data = {
+      featureId: record?.feature?.id,
+      quantity:
+        record?.feature?.name === "Discovery" ? discoveryCount : reportCount,
+    };
+    dispatch(generateAddonCheckoutUrl(data));
   };
 
   const handleCancel = () => {

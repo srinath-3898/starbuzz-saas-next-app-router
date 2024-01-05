@@ -3,12 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Reports.module.css";
 import {
   fetchReportsByBrand,
-  generateReportPDF,
+  generateInstaReportPDF,
+  generateYoutubeReportPDF,
 } from "@/store/reports/reportsAction";
 import { useEffect, useState } from "react";
 import { ConfigProvider, Empty, Table, Tooltip, message } from "antd";
-import { DownloadOutlined, LoadingOutlined } from "@ant-design/icons";
-import { resetGenerateReportPDFData } from "@/store/reports/reportsSlice";
+import {
+  DownloadOutlined,
+  InstagramOutlined,
+  LoadingOutlined,
+  YoutubeFilled,
+  YoutubeOutlined,
+} from "@ant-design/icons";
+import {
+  resetGenerateInstaReportPDFData,
+  resetGenerateYoutubeReportPDFData,
+} from "@/store/reports/reportsSlice";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader/Loader";
 import Error from "@/components/Error/Error";
@@ -29,12 +39,17 @@ const Reports = () => {
     reportsByBrandLoading,
     reportsByBrand,
     reportsByBrandError,
-    generateReportPDFLoading,
+    generateInstaReportPDFLoading,
     pdfSource,
-    generateReportPDFMessage,
-    generateReportPDFError,
+    generateInstaReportPDFMessage,
+    generateInstaReportPDFError,
     fetchReportsByBrandErrorCode,
-    generateReportPDFErrorCode,
+    generateInstaReportPDFErrorCode,
+    generateYoutubeReportPDFLoading,
+    youtubePDFSource,
+    generateYoutubeReportPDFMessage,
+    generateYoutubeReportPDFError,
+    generateYoutubeReportPDFErrorCode,
   } = useSelector((state) => state.reports);
 
   const handleDownload = (pdfSource) => {
@@ -44,8 +59,17 @@ const Reports = () => {
   };
 
   const handleGenerateReport = (record) => {
-    if (record?.pdf_source === null) {
-      dispatch(generateReportPDF({ brandId: brandId, username: record?.name }));
+    if (record?.pdf_source === null && record?.platform?.short_name === "ig") {
+      dispatch(
+        generateInstaReportPDF({ brandId: brandId, username: record?.name })
+      );
+    } else if (
+      record?.pdf_source === null &&
+      record?.platform?.short_name === "yt"
+    ) {
+      dispatch(
+        generateYoutubeReportPDF({ brandId: brandId, username: record?.name })
+      );
     }
   };
 
@@ -78,28 +102,40 @@ const Reports = () => {
       render: (text) => <p>{new Date(text).toLocaleDateString()}</p>,
     },
     {
+      title: "Platform",
+      dataIndex: "platform",
+      key: "platform",
+      align: "center",
+      render: (platform) =>
+        platform?.short_name === "yt" ? (
+          <Tooltip title="Youtube">
+            <YoutubeFilled
+              alt="Youtube Icon"
+              style={{ fontSize: "20px", color: "#ff0000" }}
+            />
+          </Tooltip>
+        ) : (
+          <Tooltip title="Instagram">
+            <InstagramOutlined className={styles.logo} alt="instagram Icon" />
+          </Tooltip>
+        ),
+    },
+    {
       title: "Actions",
       dataIndex: "",
       key: "actions",
       align: "center",
       render: (_, record) => (
         <div className={styles.actions}>
-          {generateReportPDFLoading && report?.id === record?.id ? (
+          {(generateInstaReportPDFLoading || generateYoutubeReportPDFLoading) &&
+          report?.id === record?.id ? (
             <LoadingOutlined />
           ) : (
-            <Tooltip
-              title={
-                record?.platform?.short_name === "yt"
-                  ? "Youtube download report is comming soon"
-                  : "Download Report PDF"
-              }
-              placement="top"
-            >
+            <Tooltip title={"Download Report PDF"} placement="top">
               <button
                 className={styles.download_btn}
                 onClick={() => setReport(record)}
                 style={{ padding: 0 }}
-                disabled={record?.platform?.short_name === "yt"}
               >
                 <DownloadOutlined style={{ fontSize: "18px" }} />
               </button>
@@ -117,8 +153,10 @@ const Reports = () => {
   useEffect(() => {
     if (pdfSource) {
       handleDownload(pdfSource);
+    } else if (youtubePDFSource) {
+      handleDownload(youtubePDFSource);
     }
-  }, [pdfSource]);
+  }, [pdfSource, youtubePDFSource]);
 
   useEffect(() => {
     if (report && report?.pdf_source) {
@@ -129,16 +167,34 @@ const Reports = () => {
   }, [report]);
 
   useEffect(() => {
-    if (generateReportPDFMessage || generateReportPDFError) {
+    if (
+      generateInstaReportPDFMessage ||
+      generateInstaReportPDFError ||
+      generateYoutubeReportPDFMessage ||
+      generateYoutubeReportPDFError
+    ) {
       messageApi.open({
         key: "updatable",
-        type: generateReportPDFMessage ? "success" : "error",
-        content: generateReportPDFMessage || generateReportPDFError,
+        type:
+          generateInstaReportPDFMessage || generateYoutubeReportPDFMessage
+            ? "success"
+            : "error",
+        content:
+          generateInstaReportPDFMessage ||
+          generateInstaReportPDFError ||
+          generateYoutubeReportPDFMessage ||
+          generateYoutubeReportPDFError,
         duration: 5,
       });
     }
-    dispatch(resetGenerateReportPDFData());
-  }, [generateReportPDFMessage, generateReportPDFError]);
+    dispatch(resetGenerateInstaReportPDFData());
+    dispatch(resetGenerateYoutubeReportPDFData());
+  }, [
+    generateInstaReportPDFMessage,
+    generateInstaReportPDFError,
+    generateYoutubeReportPDFMessage,
+    generateYoutubeReportPDFError,
+  ]);
 
   return (
     <>
