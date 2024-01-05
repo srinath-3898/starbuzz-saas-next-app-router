@@ -80,6 +80,9 @@ const YoutubeFilters = ({
     setErrors((prevState) => ({ ...prevState, [name]: "" }));
   };
 
+  const filterOption = (input, option) =>
+    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
   const onBlur = () => {
     setInfluencerCities([]);
     setAudienceCities([]);
@@ -121,6 +124,8 @@ const YoutubeFilters = ({
               </div>
               <Select
                 allowClear
+                showSearch
+                filterOption={filterOption}
                 placeholder="Please select your niches"
                 options={youtubeNiches?.map((item) => ({
                   label: item.title,

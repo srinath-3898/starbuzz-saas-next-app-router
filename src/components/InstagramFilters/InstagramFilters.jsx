@@ -182,6 +182,7 @@ const InstagramFilters = ({
                 </Tooltip>
               </div>
               <SingleSelect
+                showSearch={true}
                 width={"100%"}
                 placeHolder={"Please select your niches"}
                 options={instagramNiches?.filter(
@@ -592,6 +593,7 @@ const InstagramFilters = ({
               >
                 <div>
                   <SingleSelect
+                    showSearch={true}
                     width={"100%"}
                     type={"intrests"}
                     placeHolder={"By Audience Interests"}
