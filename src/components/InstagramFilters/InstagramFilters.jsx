@@ -185,9 +185,7 @@ const InstagramFilters = ({
                 showSearch={true}
                 width={"100%"}
                 placeHolder={"Please select your niches"}
-                options={instagramNiches?.filter(
-                  (item) => item?.type === "CATEGORY"
-                )}
+                options={instagramNiches}
                 optionValue={"niche_id"}
                 optionLabel={"title"}
                 selectedOption={bodyData?.category?.include}
@@ -597,9 +595,7 @@ const InstagramFilters = ({
                     width={"100%"}
                     type={"intrests"}
                     placeHolder={"By Audience Interests"}
-                    options={instagramNiches?.filter(
-                      (item) => item?.type === "INTEREST"
-                    )}
+                    options={instagramNiches}
                     optionValue={"niche_id"}
                     optionLabel={"title"}
                     selectedOption={bodyData?.interests}

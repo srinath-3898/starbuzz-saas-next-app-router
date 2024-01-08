@@ -5,6 +5,7 @@ import like from "../../assets/svgs/like.svg";
 import { Tooltip } from "antd";
 import { InfoCircleFilled } from "@ant-design/icons";
 import CircularProgessBar from "../CircularProgressBar/CircularProgessBar";
+import Link from "next/link";
 
 const Scores1 = ({ influencer }) => {
   return (
@@ -13,7 +14,10 @@ const Scores1 = ({ influencer }) => {
         <Image src={influencer?.profilePic} alt="" width={200} height={200} />
       </div>
       <div className={styles.container_2}>
-        <p className="text_medium bold">{influencer.fullName}</p>
+        <Link href={`https://www.instagram.com/${influencer?.username}/`}>
+          <p className="text_medium bold">{influencer.fullName}</p>
+        </Link>
+
         <div className={styles.container_2_box_1}>
           <div>
             <p className="text_small bold">{influencer.followersCount}</p>

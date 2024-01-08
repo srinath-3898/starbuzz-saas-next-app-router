@@ -38,3 +38,8 @@
     #285aeb 90%
   );
 }
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+}
