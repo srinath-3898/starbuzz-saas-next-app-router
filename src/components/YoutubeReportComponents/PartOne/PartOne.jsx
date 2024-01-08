@@ -3,6 +3,7 @@ import styles from "./PartOne.module.css";
 import Image from "next/image";
 import { CheckCircleFilled } from "@ant-design/icons";
 import CircularProgessBar from "@/components/CircularProgressBar/CircularProgessBar";
+import Link from "next/link";
 const PartOne = ({ influencer }) => {
   return (
     <div className={styles.container}>
@@ -16,16 +17,30 @@ const PartOne = ({ influencer }) => {
         />
       </div>
       <div className={styles.container_2}>
-        <p className="text_large bold">
-          @{influencer?.username}{" "}
-          <span>
-            {influencer?.is_verified ? (
-              <CheckCircleFilled style={{ margin: "3px", color: "blue" }} />
-            ) : (
-              ""
-            )}
-          </span>
-        </p>{" "}
+        <div className={styles.title}>
+          <Link
+            href={`https://www.youtube.com/@${influencer?.username}/`}
+            target="_blank"
+          >
+            {" "}
+            <p
+              className="text_large bold"
+              style={{ textDecorationLine: "underline" }}
+            >
+              {" "}
+              @{influencer?.username}{" "}
+            </p>
+          </Link>
+
+          {influencer?.is_verified ? (
+            <CheckCircleFilled
+              style={{ fontSize: "15px", margin: "3px", color: "blue" }}
+            />
+          ) : (
+            ""
+          )}
+        </div>
+
         <p className="text_medium">{influencer?.title}</p>
         <p className="text_medium"> category : {influencer?.category_name}</p>
         <p className="text_medium">

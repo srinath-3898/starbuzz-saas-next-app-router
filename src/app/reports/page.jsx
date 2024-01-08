@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader/Loader";
 import Error from "@/components/Error/Error";
 import Pagination from "@/components/Pagination/Pagination";
+import Link from "next/link";
 
 const Reports = () => {
   const dispatch = useDispatch();
@@ -127,6 +128,41 @@ const Reports = () => {
       align: "center",
       render: (_, record) => (
         <div className={styles.actions}>
+          {record?.platform?.short_name === "ig" ? (
+            <Link
+              href={{
+                pathname: "/report",
+                query: {
+                  profilePic: record?.avatar_url,
+                  name: record?.full_name,
+                  username: record?.name,
+                },
+              }}
+              style={{
+                color: "#ff5900",
+              }}
+            >
+              view report
+            </Link>
+          ) : record?.platform?.short_name === "yt" ? (
+            <Link
+              href={{
+                pathname: "/report/youtube",
+                query: {
+                  username: record?.name,
+                },
+              }}
+              target="_blank"
+              style={{
+                color: "#ff5900",
+              }}
+            >
+              view report
+            </Link>
+          ) : (
+            ""
+          )}
+
           {(generateInstaReportPDFLoading || generateYoutubeReportPDFLoading) &&
           report?.id === record?.id ? (
             <LoadingOutlined />

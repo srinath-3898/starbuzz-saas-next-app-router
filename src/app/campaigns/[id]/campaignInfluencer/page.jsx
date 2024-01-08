@@ -324,7 +324,15 @@ const CampaignInfluencer = () => {
                   {postsByCampaignInfluencer?.influencer?.full_name}
                 </p>
                 <Link
-                  href={`https://www.instagram.com/${username}/`}
+                  href={
+                    postsByCampaignInfluencer?.influencer?.platform
+                      ?.short_name === "ig"
+                      ? `https://www.instagram.com/${username}/`
+                      : postsByCampaignInfluencer?.influencer?.platform
+                          ?.short_name === "yt"
+                      ? `https://www.youtube.com/@${username}`
+                      : "#"
+                  }
                   target="_blank"
                   className="text_medium"
                 >

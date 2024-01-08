@@ -253,19 +253,35 @@ const Campaign = () => {
         return (
           <div className={styles.actions}>
             <Tooltip title="View report">
-              <Link
-                href={{
-                  pathname: "/report",
-                  query: {
-                    profilePic: record?.avatar_url,
-                    name: record?.full_name,
-                    username: record?.username,
-                  },
-                }}
-                target="_blank"
-              >
-                <FileTextOutlined style={{ fontSize: 17 }} />
-              </Link>
+              {record?.platform?.short_name === "ig" ? (
+                <Link
+                  href={{
+                    pathname: "/report",
+                    query: {
+                      profilePic: record?.avatar_url,
+                      name: record?.full_name,
+                      username: record?.username,
+                    },
+                  }}
+                  target="_blank"
+                >
+                  <FileTextOutlined style={{ fontSize: 17 }} />
+                </Link>
+              ) : record?.platform?.short_name === "yt" ? (
+                <Link
+                  href={{
+                    pathname: "/report/youtube",
+                    query: {
+                      username: record?.username,
+                    },
+                  }}
+                  target="_blank"
+                >
+                  <FileTextOutlined style={{ fontSize: 17 }} />
+                </Link>
+              ) : (
+                <></>
+              )}
             </Tooltip>
             <Tooltip title="Update campaign influencer status and budget">
               <EditOutlined

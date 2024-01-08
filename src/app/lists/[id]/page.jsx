@@ -21,7 +21,11 @@ import {
 import Image from "next/image";
 import Pagination from "@/components/Pagination/Pagination";
 import Link from "next/link";
-import { DeleteOutlined, InstagramOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  InstagramOutlined,
+  YoutubeFilled,
+} from "@ant-design/icons";
 import CampaignsIcon from "@/components/CampaignsIcon/CampaignsIcon";
 import { resetDeleteInfluencerFromListData } from "@/store/list/listSlice";
 import AddInfluencerModal from "@/components/Modals/AddInfluencerModal/AddInfluencer";
@@ -88,23 +92,38 @@ const List = () => {
     },
     {
       title: "Scoial media accounts",
+      dataIndex: "platform",
       key: "id",
       align: "center",
-      render: (text, record) => (
-        <Link
-          href={`https://www.instagram.com/${record?.username}/`}
-          target="_blank"
-        >
-          <InstagramOutlined style={{ fontSize: "20px", color: "#fe5900" }} />
-        </Link>
-      ),
+      render: (platform, record) =>
+        platform?.short_name === "ig" ? (
+          <Link
+            href={`https://www.instagram.com/${record?.username}/`}
+            target="_blank"
+          >
+            <InstagramOutlined className={styles.logo} alt="instagram Icon" />
+          </Link>
+        ) : platform?.short_name === "yt" ? (
+          <Link
+            href={`https://www.youtube.com/@${record?.username}/`}
+            target="_blank"
+          >
+            {" "}
+            <YoutubeFilled
+              alt="Youtube Icon"
+              style={{ fontSize: "20px", color: "#ff0000" }}
+            />
+          </Link>
+        ) : (
+          ""
+        ),
     },
     {
       title: "Report",
       align: "center",
       key: "report",
-      render: (text, record) => {
-        return (
+      render: (text, record) =>
+        record?.platform?.short_name === "ig" ? (
           <Link
             href={{
               pathname: "/report",
@@ -126,9 +145,26 @@ const List = () => {
           >
             View report
           </Link>
-        );
-      },
+        ) : record?.platform?.short_name === "yt" ? (
+          <Link
+            href={{
+              pathname: "/report/youtube",
+              query: {
+                username: record?.username,
+              },
+            }}
+            target="_blank"
+            style={{
+              color: "#ff5900",
+            }}
+          >
+            view report
+          </Link>
+        ) : (
+          ""
+        ),
     },
+
     {
       title: "Actions",
       key: "actions",

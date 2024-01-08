@@ -147,6 +147,7 @@ const Report = () => {
       const influencer = report;
       setInfluencer({
         profilePic: influencer.photo_url,
+        username: influencer.username,
         fullName: influencer.full_name,
         followersCount: convertToKorM(influencer.followers_count),
         location: influencer?.location,
